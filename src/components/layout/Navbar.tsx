@@ -17,7 +17,7 @@ const mainNav = [
 
 const pagesDropdown = [
   { href: "/education", label: "Education" },
-  { href: "/team", label: "Doctors" },
+  { href: "/team", label: "Our Team" },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -105,7 +105,7 @@ export default function Navbar() {
               href="/contact"
               className="bg-primary text-white border-2 border-primary px-6 py-3 rounded-md text-[15px] uppercase tracking-wider hover:bg-transparent hover:text-primary transition duration-300"
             >
-              Book an Appointment
+              Get Started
             </Link>
           </div>
 

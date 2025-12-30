@@ -60,8 +60,7 @@ export default function TestimonialSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
             <p className="text-primary font-bold uppercase tracking-[2px] text-sm mb-3">Testimonials</p>
-            <h2 className="text-4xl font-serif font-bold text-heading sm:text-5xl mb-6">What Patients Say</h2>
-            <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            <h2 className="text-4xl font-serif font-bold text-heading sm:text-5xl mb-6">Happy Clients</h2>
         </div>
 
         <div className="relative max-w-4xl mx-auto">

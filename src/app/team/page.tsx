@@ -1,8 +1,22 @@
 import Link from "next/link";
 import PageHeader from "@/components/layout/PageHeader";
-import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram, HeartHandshake, Award, Zap } from "lucide-react";
 
-const doctors = [
+interface Socials {
+  facebook: string;
+  twitter: string;
+  linkedin: string;
+  instagram: string;
+}
+
+interface Doctor {
+  name: string;
+  role: string;
+  image: string;
+  socials: Socials;
+}
+
+const doctors: Doctor[] = [
   {
     name: "Dr. Lloyd Okine",
     role: "Chief Medical Officer",
@@ -29,10 +43,28 @@ const doctors = [
   }
 ];
 
+const commitments = [
+  {
+    icon: HeartHandshake,
+    title: "World-Class Care",
+    description: "We are committed to providing the highest standard of healthcare solutions tailored to your unique needs."
+  },
+  {
+    icon: Award,
+    title: "Holistic Approach",
+    description: "Our methods focus on the whole person, integrating physical, mental, and social well-being."
+  },
+  {
+    icon: Zap,
+    title: "Constant Innovation",
+    description: "We stay at the forefront of medical technology and lifestyle medicine to ensure the best outcomes."
+  }
+];
+
 export default function TeamPage() {
   return (
     <div className="bg-white min-h-screen">
-      <PageHeader title="Our Doctors" items={[{ label: "Team" }]} />
+      <PageHeader title="Our Team" items={[{ label: "Team" }]} />
 
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,10 +73,9 @@ export default function TeamPage() {
                 <h2 className="text-4xl font-serif font-bold text-heading sm:text-5xl mb-6">
                     Meet Our Experts
                 </h2>
-                <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
                 {doctors.map((doc, index) => (
                     <div key={index} className="group">
                         <div className="relative overflow-hidden rounded-t-lg">
@@ -62,6 +93,37 @@ export default function TeamPage() {
                         </div>
                     </div>
                 ))}
+            </div>
+
+            {/* Our Commitment Section */}
+            <div className="bg-gray-50 rounded-2xl p-12 md:p-16 border border-gray-100 shadow-sm mb-20">
+                <div className="max-w-3xl mx-auto text-center mb-12">
+                   <h2 className="text-3xl font-serif font-bold text-heading mb-4">Our Commitment</h2>
+                   <p className="text-gray-600">At Mednova+, we don't just treat symptoms. We build relationships and foster health transformations through dedicated expertise.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    {commitments.map((item, idx) => (
+                        <div key={idx} className="text-center group">
+                            <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <item.icon className="h-8 w-8 text-primary group-hover:text-white" />
+                            </div>
+                            <h3 className="text-xl font-bold text-heading mb-3">{item.title}</h3>
+                            <p className="text-sm text-gray-500 leading-relaxed">{item.description}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Join Our Team CTA */}
+            <div className="text-center">
+                <h3 className="text-2xl font-serif font-bold text-heading mb-6">Want to Join Our Mission?</h3>
+                <p className="text-gray-600 mb-8 max-w-2xl mx-auto">We are always looking for passionate health professionals and consultants to join our growing global team.</p>
+                <Link 
+                    href="/contact" 
+                    className="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold uppercase tracking-wider hover:bg-heading transition duration-300 shadow-lg"
+                >
+                    Get In Touch
+                </Link>
             </div>
         </div>
       </section>

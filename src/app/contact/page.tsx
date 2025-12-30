@@ -1,4 +1,5 @@
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Phone, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import PageHeader from "@/components/layout/PageHeader";
 import ConsultationForm from "@/components/forms/ContactForm";
 
@@ -13,7 +14,7 @@ export default function ContactPage() {
           <div className="space-y-12">
              <div>
                 <p className="text-primary font-bold uppercase tracking-[2px] text-sm mb-3">Get in Touch</p>
-                <h2 className="text-4xl font-serif font-bold text-heading mb-6">Contact with us</h2>
+                <h2 className="text-4xl font-serif font-bold text-heading mb-6">Connect with us</h2>
                 <p className="text-black leading-relaxed font-light">
                     Have questions about our services or need expert consultancy? We'd love to hear from you.
                 </p>
@@ -79,7 +80,17 @@ export default function ContactPage() {
                      <p className="text-black font-light text-sm">+233 20 123 4567</p>
                    </div>
                  </li>
-              </ul>
+               </ul>              
+               <div className="mt-8 pt-6 border-t border-gray-50">
+                  <Link 
+                    href="https://gh.mednova.org" 
+                    target="_blank"
+                    className="inline-flex items-center text-primary font-bold uppercase text-xs tracking-widest hover:text-heading transition-colors group"
+                  >
+                    Visit our Ghana Branch 
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+               </div>
             </div>
           </div>
 

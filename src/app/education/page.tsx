@@ -36,8 +36,7 @@ export default function EducationPage() {
             <p className="text-primary font-bold uppercase tracking-[2px] text-sm mb-3">Learn With Us</p>
             <h2 className="text-4xl font-serif font-bold text-heading sm:text-5xl mb-6">
                  Featured Courses
-            </h2>
-            <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            </h2>            
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

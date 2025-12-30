@@ -37,7 +37,6 @@ export default function TeamSection() {
             <h2 className="text-4xl font-serif font-bold text-heading sm:text-5xl mb-6">
                 Meet Our Experts
             </h2>
-            <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">

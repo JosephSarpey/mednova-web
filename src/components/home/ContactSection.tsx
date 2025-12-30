@@ -21,7 +21,7 @@ export default function ConsultationSection() {
           <div className="flex flex-col justify-center pt-10 lg:pt-0">
             <h4 className="text-primary font-bold uppercase tracking-[2px] mb-4 text-sm">Welcome to Mednova+</h4>
             <h2 className="text-4xl lg:text-5xl font-serif font-bold text-heading mb-6 leading-tight">
-              Holistic Approaches for <br /> Better Health
+              Holistic Approaches for <br /> <span className="text-primary font-black">Better Health</span>
             </h2>
             <p className="text-[#3E4241] mb-6 text-[15px] leading-7 font-light">
               We define health not merely as the absence of disease, but as a state of complete physical, mental, and social well-being. Our approach integrates the best of modern medicine with evidence-based lifestyle changes to prevent and treat chronic diseases.

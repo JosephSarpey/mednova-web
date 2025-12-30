@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { HeartPulse, Globe, Stethoscope, ArrowRight } from "lucide-react";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 
@@ -25,14 +26,25 @@ const services = [
 
 export default function ServicesOverview() {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-24 overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/services-section.jpg"
+          alt="Services Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-primary font-bold uppercase tracking-[2px] text-sm mb-3">Our Services</p>
-          <h2 className="text-4xl font-serif font-bold text-heading sm:text-5xl mb-6">
+          <h2 className="text-4xl font-serif font-bold text-white sm:text-5xl mb-6">
             We Offer Different Services
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -55,7 +67,21 @@ export default function ServicesOverview() {
             </SpotlightCard>
           ))}
         </div>
+
+        <div className="mt-16 text-center">
+          <p className="text-white/80 mb-6 text-lg italic">
+            Need specialized care? Explore our comprehensive list of healthcare solutions.
+          </p>
+          <Link
+            href="/services"
+            className="inline-flex items-center bg-primary text-white px-10 py-4 rounded-md font-bold uppercase text-sm tracking-widest hover:bg-primary/90 transition shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 duration-200 group"
+          >
+            View All Services 
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition duration-200" />
+          </Link>
+        </div>
       </div>
+
     </section>
   );
 }

@@ -1,6 +1,9 @@
+"use client"
+
 import Link from "next/link";
 import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 import Image from "next/image";
+import Newsletter from "./Newsletter";
 
 export default function Footer() {
   return (
@@ -8,42 +11,25 @@ export default function Footer() {
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <Image 
-          src="/footer-bg.jfif" 
+          src="/footer-bg.jpg" 
           alt="Footer Background" 
           fill 
           className="object-cover opacity-30"
         />
-        <div className="absolute inset-0 bg-[#0a0a0a]/60" />
+        <div className="absolute inset-0 bg-[#0a0a0a]/30" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Newsletter Section - Matches Template Style */}
-        <div className="bg-white/5 p-8 md:p-12 rounded-lg mb-20 flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="lg:w-1/2">
-            <h3 className="text-3xl font-serif mb-2">Subscribe Our Newsletter</h3>
-            <p className="text-gray-400">Stay updated with our latest health insights and news.</p>
-          </div>
-          <div className="w-full lg:w-1/2">
-            <form className="flex flex-col sm:flex-row gap-4">
-              <input 
-                type="email" 
-                placeholder="Enter Email Address" 
-                className="flex-grow bg-white text-gray-900 px-6 py-4 rounded-full outline-none focus:ring-2 focus:ring-mednova-blue"
-              />
-              <button className="bg-primary text-white px-8 py-4 rounded-full font-bold uppercase tracking-wider hover:bg-white hover:text-primary transition duration-300">
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
+        {/* Newsletter Section */}
+        <Newsletter />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-[15px]">
           {/* Brand & Socials */}
           <div className="col-span-1">
             <div className="mb-8 flex items-center gap-3">
-                 <Image src="/logo.jpg" alt="Logo" width={50} height={50} />
-                 <h2 className="text-2xl font-bold font-serif m-0">MEDNOVA+</h2>                 
+                  <Image src="/logo.png" className="rounded-md" alt="Logo" width={50} height={50} />
+                 <h2 className="text-2xl font-bold font-serif m-0">MEDNOVA+ INC.</h2>                 
             </div>
             <p className="text-gray-400 mb-8 leading-7">
               Leading the way in holistic health, lifestyle medicine, and public health consultancy. Committed to improving quality of life globally.

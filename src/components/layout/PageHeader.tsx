@@ -9,7 +9,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, items = [] }: PageHeaderProps) {
   return (
-    <div className="relative bg-secondary py-32 md:py-48">
+    <div className="relative bg-secondary py-15 md:py-20">
        {/* Background Image / Overlay */}
        <div className="absolute inset-0 bg-[url('/hero-bg.png')] bg-cover bg-center opacity-60"></div>
        <div className="absolute inset-0 bg-[#0a0a0a]/60 mix-blend-multiply"></div>

@@ -5,6 +5,7 @@ import TrackRecords from "@/components/home/TrackRecords";
 import TestimonialSection from "@/components/home/TestimonialSection";
 import TeamSection from "@/components/home/TeamSection";
 import NewsSection from "@/components/home/NewsSection";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function Home() {
@@ -14,14 +15,17 @@ export default function Home() {
       <ScrollReveal>
         <ConsultationSection />
       </ScrollReveal>
+      <ScrollReveal>
+        <WhyChooseUs />
+      </ScrollReveal>
       <ScrollReveal delay={0.1}>
         <ServicesOverview />
       </ScrollReveal>
       <ScrollReveal>
-        <TrackRecords />
+        <TestimonialSection />
       </ScrollReveal>
       <ScrollReveal>
-        <TestimonialSection />
+        <TrackRecords />
       </ScrollReveal>
       <ScrollReveal>
         <TeamSection />
