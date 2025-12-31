@@ -10,19 +10,19 @@ export default function Hero() {
       <div className="relative flex-grow min-h-[600px] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/hero-bg.png"
+            src="/hero-bg.jpg"
             alt="Medical Office"
             fill
             className="object-cover"
             priority
           />
           {/* Darker gradient for better text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/85 to-black/80" />
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 pb-32">
           <div className="max-w-4xl text-white">
-            <span className="block text-primary font-bold tracking-[2px] uppercase mb-4 text-sm md:text-base pl-1 shadow-black drop-shadow-md">
+            <span className="block text-blue-400 font-bold tracking-[2px] uppercase mb-4 text-sm md:text-base pl-1 shadow-black drop-shadow-md">
               Holistic Health • Lifestyle • Wellness
             </span>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight mb-8 leading-[1.1] drop-shadow-lg">

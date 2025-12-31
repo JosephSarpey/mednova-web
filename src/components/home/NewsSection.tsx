@@ -35,7 +35,7 @@ export default function NewsSection() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
             <div>
                 <p className="text-primary font-bold uppercase tracking-[2px] text-sm mb-3">Recent News</p>
                 <h2 className="text-4xl font-serif font-bold text-heading sm:text-5xl">
