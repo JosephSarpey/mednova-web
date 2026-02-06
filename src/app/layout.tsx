@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import TopBar from "@/components/layout/TopBar";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/layout/CookieConsent";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -20,7 +21,7 @@ const unna = Unna({
 
 export const metadata: Metadata = {
   title: "Mednova+ Inc.",
-  description: "Holistic Health, Wellness, Lifestyle Medicine & Public Health Consultancy",
+  description: "Comprehensive Healthcare Services, Dental Care & Public Health Consultancy",
   icons: {
     icon: '/logo.jpg',
   },
@@ -43,6 +44,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <CookieConsent />
+        <ScrollToTop />
       </body>
     </html>
   );

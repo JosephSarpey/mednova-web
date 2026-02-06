@@ -29,16 +29,16 @@ export default function EducationPage() {
       <PageHeader title="Education & Training" items={[{ label: "Education" }]} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        
+
         {/* Featured Courses */}
         <div className="mb-24">
           <div className="text-center mb-16">
             <p className="text-primary font-bold uppercase tracking-[2px] text-sm mb-3">Learn With Us</p>
             <h2 className="text-4xl font-serif font-bold text-heading sm:text-5xl mb-6">
-                 Featured Courses
-            </h2>            
+              Featured Courses (Dummy Data)
+            </h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {courses.map((course) => (
               <div key={course.title} className="bg-white border border-gray-100 rounded-md p-8 shadow-sm hover:shadow-xl transition duration-300 group">
@@ -68,10 +68,10 @@ export default function EducationPage() {
 
         {/* Resources Section */}
         <div className="bg-secondary rounded-sm p-10 md:p-16 relative overflow-hidden">
-           {/* Background Pattern */}
-           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
-           <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/5 rounded-full -ml-20 -mb-20"></div>
-           
+          {/* Background Pattern */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/5 rounded-full -ml-20 -mb-20"></div>
+
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div>
               <div className="flex items-center mb-6">
@@ -83,7 +83,7 @@ export default function EducationPage() {
               </p>
             </div>
             <Link
-              href="/contact" 
+              href="/contact"
               className="inline-flex items-center px-8 py-4 bg-primary text-white font-bold uppercase tracking-widest hover:bg-white hover:text-primary transition duration-300 whitespace-nowrap"
             >
               Access Library <Download className="ml-2 h-4 w-4" />

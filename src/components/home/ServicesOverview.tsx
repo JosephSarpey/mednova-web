@@ -1,28 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import { HeartPulse, Globe, Stethoscope, ArrowRight } from "lucide-react";
+import { HeartPulse, Globe, Stethoscope, Smile, ArrowRight } from "lucide-react";
 import SpotlightCard from "@/components/ui/SpotlightCard";
+import { services } from "@/data/services";
 
-const services = [
-  {
-    title: "Holistic Health",
-    description: "Comprehensive approaches to health that look at the whole person—body, mind, spirit, and emotions.",
-    icon: HeartPulse,
-    href: "/services",
-  },
-  {
-    title: "Lifestyle Medicine",
-    description: "Evidence-based therapeutic interventions to treat and prevent chronic diseases through lifestyle changes.",
-    icon: Stethoscope,
-    href: "/services",
-  },
-  {
-    title: "Public Health",
-    description: "Expert guidance on public health initiatives, policy development, and community health strategies.",
-    icon: Globe,
-    href: "/services",
-  },
-];
+const iconMap: Record<string, any> = {
+  HeartPulse,
+  Globe,
+  Stethoscope,
+  Smile
+};
 
 export default function ServicesOverview() {
   return (
@@ -30,9 +17,10 @@ export default function ServicesOverview() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/services-section.jpg"
+          src="/mednova_hospital.jpg"
           alt="Services Background"
           fill
+          sizes="100vw"
           className="object-cover"
           priority
         />
@@ -48,24 +36,27 @@ export default function ServicesOverview() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <SpotlightCard key={service.title} className="bg-white rounded-md p-10 shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100 group hover:-translate-y-2" spotlightColor="rgba(0, 122, 255, 0.1)">
-              <div className="mb-8 relative">
-                <div className="absolute -top-3 -left-3 w-12 h-12 bg-primary/10 rounded-full group-hover:scale-125 transition duration-300" />
-                <service.icon className="h-12 w-12 text-primary relative z-10" />
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-heading mb-4 group-hover:text-primary transition duration-300">{service.title}</h3>
-              <p className="text-black mb-8 leading-relaxed">
-                {service.description}
-              </p>
-              <Link
-                href={service.href}
-                className="inline-flex items-center text-heading font-bold uppercase text-xs tracking-wider hover:text-primary transition"
-              >
-                Read More <ArrowRight className="ml-2 h-3 w-3" />
-              </Link>
-            </SpotlightCard>
-          ))}
+          {services.slice(0, 3).map((service) => {
+            const Icon = iconMap[service.icon] || HeartPulse;
+
+            return (
+              <SpotlightCard key={service.id} className="bg-white rounded-md p-10 shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100 group hover:-translate-y-2" spotlightColor="rgba(0, 122, 255, 0.1)">
+                <div className="mb-8 w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition duration-300">
+                  <Icon className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-2xl font-serif font-bold text-heading mb-4 group-hover:text-primary transition duration-300">{service.title}</h3>
+                <p className="text-black mb-8 leading-relaxed line-clamp-3">
+                  {service.description}
+                </p>
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="inline-flex items-center text-heading font-bold uppercase text-xs tracking-wider hover:text-primary transition"
+                >
+                  Read More <ArrowRight className="ml-2 h-3 w-3" />
+                </Link>
+              </SpotlightCard>
+            );
+          })}
         </div>
 
         <div className="mt-16 text-center">
@@ -76,7 +67,7 @@ export default function ServicesOverview() {
             href="/services"
             className="inline-flex items-center bg-primary text-white px-10 py-4 rounded-md font-bold uppercase text-sm tracking-widest hover:bg-primary/90 transition shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 duration-200 group"
           >
-            View All Services 
+            View All Services
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition duration-200" />
           </Link>
         </div>

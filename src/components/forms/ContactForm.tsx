@@ -1,5 +1,7 @@
 "use client";
 
+import { services } from "@/data/services";
+
 export default function ConsultationForm() {
   return (
     <>
@@ -24,9 +26,11 @@ export default function ConsultationForm() {
           />
           <select className="w-full px-4 py-3 bg-transparent border-b border-[#e1e1e1] text-[#3E4241] focus:outline-none focus:border-primary transition appearance-none cursor-pointer">
             <option value="">Type of Service</option>
-            <option value="holistic">Holistic Health Checkup</option>
-            <option value="lifestyle">Lifestyle Medicine</option>
-            <option value="public_health">Public Health Consultancy</option>
+            {services.map((service) => (
+              <option key={service.id} value={service.slug}>
+                {service.title}
+              </option>
+            ))}
           </select>
         </div>
         <textarea
@@ -36,9 +40,9 @@ export default function ConsultationForm() {
         />
         <button
           type="submit"
-          className="w-full bg-primary text-white font-bold uppercase tracking-wider py-4 rounded-md hover:bg-heading transition duration-300"
+          className="w-full bg-transparent border-2 border-primary text-primary font-bold uppercase cursor-pointer tracking-wider py-4 rounded-md hover:bg-heading transition duration-300"
         >
-          Book Appointment
+          Submit Request
         </button>
       </form>
     </>

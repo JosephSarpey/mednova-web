@@ -17,7 +17,7 @@ const Counter = ({ end, suffix = "" }: { end: number, suffix?: string }) => {
           let start = 0;
           const duration = 2000;
           const increment = end / (duration / 16); // 60fps
-          
+
           const timer = setInterval(() => {
             start += increment;
             if (start >= end) {
@@ -47,65 +47,67 @@ export default function TrackRecords() {
     <section className="relative py-24 text-white overflow-hidden">
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image 
-          src="/track_record_bg.jpg" 
-          alt="Background" 
-          fill 
+        <Image
+          src="/mednova_space.jpg"
+          alt="Background"
+          fill
+          sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-secondary/70" />
+        {/* Darker, higher contrast overlay */}
+        <div className="absolute inset-0 bg-gray-900/85 mix-blend-multiply" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-4xl font-serif font-bold sm:text-5xl mb-6 leading-tight">
-              We Are A Certified <br /> Award Winning Clinic
+              Evidence-Based <br /> Holistic Impact
             </h2>
             <p className="text-lg text-gray-300 mb-8 font-light leading-relaxed">
-              Mednova+ Inc. has a proven history of delivering excellence in healthcare consultancy and wellness programs. Our commitment to quality and innovation has helped us build lasting relationships and achieve measurable results.
+              At MedNova+, our dedication to innovation and scientific rigor translates into measurable results across public health, mental wellness, and dental excellence.
             </p>
             <p className="text-lg text-gray-300 font-light leading-relaxed">
-              From local community initiatives to global public health strategies, we bring expertise and dedication to every project we undertake.
+              From reducing health disparities in underserved communities to training the next generation of healthcare leaders, we are redefining global wellness.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-8">
-            <div className="bg-white/5 p-8 rounded-sm text-center border border-white/10 hover:bg-white/10 transition duration-300">
-              <div className="mx-auto w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center border border-white/10 hover:bg-white/10 transition duration-300 group">
+              <div className="mx-auto w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Users className="h-7 w-7 text-primary" />
               </div>
-              <div className="text-4xl font-bold font-serif mb-2">
-                <Counter end={500} suffix="+" />
+              <div className="text-4xl font-bold mb-2">
+                <Counter end={10000} suffix="+" />
               </div>
-              <div className="text-sm uppercase tracking-wider text-gray-400">Happy Patients</div>
+              <div className="text-sm uppercase tracking-wider text-gray-400 font-medium">Individuals Supported</div>
             </div>
-            <div className="bg-white/5 p-8 rounded-sm text-center border border-white/10 hover:bg-white/10 transition duration-300">
-              <div className="mx-auto w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center border border-white/10 hover:bg-white/10 transition duration-300 group">
+              <div className="mx-auto w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Building2 className="h-7 w-7 text-primary" />
               </div>
-              <div className="text-4xl font-bold font-serif mb-2">
-                <Counter end={20} suffix="+" />
+              <div className="text-4xl font-bold mb-2">
+                <Counter end={100} suffix="+" />
               </div>
-              <div className="text-sm uppercase tracking-wider text-gray-400">Hospitals</div>
+              <div className="text-sm uppercase tracking-wider text-gray-400 font-medium">Dental Practices</div>
             </div>
-             <div className="bg-white/5 p-8 rounded-sm text-center border border-white/10 hover:bg-white/10 transition duration-300">
-              <div className="mx-auto w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center border border-white/10 hover:bg-white/10 transition duration-300 group">
+              <div className="mx-auto w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Globe2 className="h-7 w-7 text-primary" />
               </div>
-              <div className="text-4xl font-bold font-serif mb-2">
-                <Counter end={2} />
+              <div className="text-4xl font-bold mb-2">
+                <Counter end={5000} suffix="+" />
               </div>
-              <div className="text-sm uppercase tracking-wider text-gray-400">Country Offices</div>
+              <div className="text-sm uppercase tracking-wider text-gray-400 font-medium">Professionals Trained</div>
             </div>
-             <div className="bg-white/5 p-8 rounded-sm text-center border border-white/10 hover:bg-white/10 transition duration-300">
-              <div className="mx-auto w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center border border-white/10 hover:bg-white/10 transition duration-300 group">
+              <div className="mx-auto w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Trophy className="h-7 w-7 text-primary" />
               </div>
-              <div className="text-4xl font-bold font-serif mb-2">
+              <div className="text-4xl font-bold mb-2">
                 <Counter end={10} suffix="+" />
               </div>
-              <div className="text-sm uppercase tracking-wider text-gray-400">Year Experience</div>
+              <div className="text-sm uppercase tracking-wider text-gray-400 font-medium">Years Experience</div>
             </div>
           </div>
         </div>

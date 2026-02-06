@@ -8,23 +8,23 @@ export default function TopBar() {
         <div className="flex items-center space-x-8">
           <div className="flex items-center gap-2">
             <Mail className="h-4 w-4" />
-            <span>info@mednova.org</span>
+            <a href="mailto:director@mednova.org">director@mednova.org</a>
           </div>
           <div className="flex items-center gap-2">
             <Phone className="h-4 w-4" />
-            <span>+1 (212) 555-0123</span>
+            <a href="tel:+19146166162">+1 (914) 616-6162</a>
           </div>
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4" />
             <span>Mon - Fri: 8:00am - 6:00pm</span>
           </div>
         </div>
-        
+
         <div className="flex items-center space-x-6">
-          <a href="#" className="hover:text-mednova-green transition"><Facebook className="h-4 w-4" /></a>
+          <a href="https://www.facebook.com/MedNova" target="_blank" className="hover:text-mednova-green transition"><Facebook className="h-4 w-4" /></a>
           <a href="#" className="hover:text-mednova-green transition"><Twitter className="h-4 w-4" /></a>
           <a href="#" className="hover:text-mednova-green transition"><Linkedin className="h-4 w-4" /></a>
-          <a href="#" className="hover:text-mednova-green transition"><Instagram className="h-4 w-4" /></a>
+          <a href="https://www.instagram.com/mednova_clinic" target="_blank" className="hover:text-mednova-green transition"><Instagram className="h-4 w-4" /></a>
         </div>
       </div>
     </div>
