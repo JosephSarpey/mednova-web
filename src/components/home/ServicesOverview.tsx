@@ -1,14 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import { HeartPulse, Globe, Stethoscope, Smile, ArrowRight } from "lucide-react";
+import { HeartPulse, Smile, ArrowRight, BookOpenCheck, Leaf, Brain, HandHeart } from "lucide-react";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import { services } from "@/data/services";
 
 const iconMap: Record<string, any> = {
   HeartPulse,
-  Globe,
-  Stethoscope,
-  Smile
+  Smile,
+  BookOpenCheck,
+  Leaf,
+  Brain,
+  HandHeart
 };
 
 export default function ServicesOverview() {

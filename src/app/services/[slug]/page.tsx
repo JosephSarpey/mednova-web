@@ -1,18 +1,18 @@
 import { notFound } from "next/navigation";
 import { services } from "@/data/services";
 import PageHeader from "@/components/layout/PageHeader";
-import { HeartPulse, Globe, Stethoscope, CheckCircle, Smile, ArrowLeft, BookOpen, Leaf, Brain } from "lucide-react";
+import { HeartPulse, CheckCircle, Smile, ArrowLeft, BookOpen, Leaf, Brain, BookOpenCheck, HandHeart } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 const iconMap: Record<string, any> = {
     HeartPulse,
-    Globe,
-    Stethoscope,
     Smile,
     BookOpen,
     Leaf,
-    Brain
+    Brain,
+    BookOpenCheck,
+    HandHeart
 };
 
 export function generateStaticParams() {
@@ -60,9 +60,20 @@ export default async function ServiceDetailPage({ params }: { params: Params }) 
                             </div>
 
                             <h1 className="text-4xl font-serif font-bold text-heading mb-6">{service.title}</h1>
-                            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+                            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                                 {service.description}
                             </p>
+
+                            {/* Mobile Image */}
+                            <div className="lg:hidden rounded-2xl h-[300px] w-full relative overflow-hidden shadow-lg mb-12">
+                                <Image
+                                    src={service.image}
+                                    alt={`${service.title} Image`}
+                                    fill
+                                    sizes="100vw"
+                                    className="object-cover"
+                                />
+                            </div>
 
                             {/* Service Items List */}
                             <div className="bg-gray-50 rounded-2xl p-8 mb-12">
@@ -93,8 +104,8 @@ export default async function ServiceDetailPage({ params }: { params: Params }) 
 
                         {/* Sidebar / Visual Area */}
                         <div className="lg:w-1/3 space-y-8">
-                            {/* Service Image */}
-                            <div className="rounded-2xl h-[400px] w-full relative overflow-hidden group shadow-lg">
+                            {/* Service Image (Desktop Only) */}
+                            <div className="hidden lg:block rounded-2xl h-[400px] w-full relative overflow-hidden group shadow-lg">
                                 <Image
                                     src={service.image}
                                     alt={`${service.title} Image`}

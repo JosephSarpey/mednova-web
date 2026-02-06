@@ -15,12 +15,52 @@ export interface Service {
 
 export const services: Service[] = [
   {
+    id: "general-health-wellness",
+    slug: "general-health-wellness",
+    title: "General Health and Wellness Services",
+    description: "Because we are aware that about 60% of all diseases condition including cancer are as a result of lifestyle and behavior, we adapt to an evidence-based, data-driven approach to helping you relieve suffering.",
+    icon: "HeartPulse",
+    image: "/services/healthcare-bg.jpg",
+    items: [
+      {
+        name: "Medically-Led Consultations",
+        subItems: [
+          "Evidence based, data-driven Medically-Led Consultations",
+          "Discuss medical issues you may have relating to the management of your illness.",
+          "This is not a second opinion service, but rather to support you with the issues that are of concern to you."
+        ]
+      },
+      {
+        name: "Emotional and Psychological Well-being coaching",
+        subItems: [
+          "We will help you gain psychological flexibility to connect with the life that matters to you despite the fears and uncertainties that life brings."
+        ]
+      },
+      {
+        name: "Lifestyle care",
+        subItems: [
+          "A healthy lifestyle is a cornerstone of wellbeing.",
+          "We will guide you in making informed choices about nutrition, exercise, stress management, sleep and self-care practices.",
+          "Our goal is provide a holistic health care to empower you to take control of your health and nurture your body, mind and soul."
+        ]
+      },
+      {
+        name: "Education and Empowerment",
+        subItems: [
+          "Knowledge is power.",
+          "We will provide you with reliable information rooted in evidence, resources, and educational materials to enhance your understanding of your condition and treatment options.",
+          "With this knowledge, you will be equipped to actively participate in your care and make informed decisions."
+        ]
+      }
+    ]
+  },
+  {
     id: "public-health",
     slug: "public-health-consultancy",
     title: "Public Health Consultancy",
     description: "Addressing complex health challenges in communities worldwide. We partner with governments, non-profits, and private organizations to design and implement strategies that improve population health outcomes.",
-    icon: "Globe",
-    image: "/services/public-health-bg.jpg",
+    icon: "HandHeart",
+    image: "/services/public-health-bg_new.jpg",
     items: [
       { name: "Program Development and Evaluation" },
       { name: "Policy Analysis and Advocacy" },
@@ -33,7 +73,7 @@ export const services: Service[] = [
     slug: "education-training-research",
     title: "Education, Training & Research",
     description: "Empowerment thrives on knowledge. We deliver programs to boost health awareness and skills for individuals, professionals, and entities, keeping education rooted in current science.",
-    icon: "BookOpen",
+    icon: "BookOpenCheck",
     image: "/services/research-bg.jpg",
     items: [
       { name: "Customized training for providers and leaders" },
@@ -47,7 +87,7 @@ export const services: Service[] = [
     title: "Holistic & Lifestyle Medicine",
     description: "True wellness integrates mind, body, and spirit. We address root causes via blended traditional and complementary care for enduring health.",
     icon: "Leaf",
-    image: "/services/healthcare-bg.jpg",
+    image: "/services/holistic_medicine.jpg",
     items: [
       { name: "Personalized nutrition, exercise, and habit coaching" },
       { name: "Mind-body methods (mindfulness, yoga, meditation)" },
@@ -61,7 +101,7 @@ export const services: Service[] = [
     title: "Psychotherapy & Mental Health",
     description: "Mental health underpins total well-being. We deliver empathetic, evidence-based aid for life's hurdles via licensed therapists and coaches.",
     icon: "Brain",
-    image: "/services/mental-health-bg.jpg",
+    image: "/services/mental_health_bg.jpg",
     items: [
       { name: "Personalized therapy (anxiety, depression, trauma)" },
       { name: "Group sessions for communal healing" },

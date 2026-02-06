@@ -54,7 +54,7 @@ export default function Hero() {
                 href="/services"
                 className="inline-flex items-center justify-center bg-primary text-white font-medium px-8 py-4 rounded-full transition-all duration-300 hover:bg-secondary hover:shadow-lg shadow-primary/30"
               >
-                Book an Appointment
+                Explore Our Services
               </Link>
               <Link
                 href="/about"
@@ -122,8 +122,8 @@ export default function Hero() {
               className="absolute -top-10 right-0 sm:top-0 sm:right-6 lg:-top-4 lg:right-10 z-30 w-14 h-14 sm:w-18 sm:h-18 flex items-center justify-center"
             >
               <Image
-                src="/3d-heartbeat-red.jpeg"
-                alt="3d-heartbeat-red"
+                src="/3d-heartbeat.jpg"
+                alt="3d-heartbeat"
                 width={100}
                 height={100}
                 className="w-full h-full object-contain rounded-full"
@@ -140,7 +140,7 @@ export default function Hero() {
                 <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
               </div>
               <div>
-                <p className="font-bold text-secondary text-[10px] sm:text-xs text-nowrap">10k+ Lives Impacted</p>
+                <p className="font-bold text-secondary text-[10px] sm:text-xs">10k+ Lives Impacted</p>
                 <p className="text-[9px] sm:text-[10px] text-gray-500">Global Wellness</p>
               </div>
             </motion.div>

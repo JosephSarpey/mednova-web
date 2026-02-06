@@ -1,4 +1,4 @@
-import { HeartPulse, Globe, Stethoscope, CheckCircle, Smile, ArrowRight, BookOpen, Leaf, Brain } from "lucide-react";
+import { HeartPulse, CheckCircle, Smile, ArrowRight, BookOpen, Leaf, Brain, BookOpenCheck, HandHeart } from "lucide-react";
 import Image from "next/image";
 import PageHeader from "@/components/layout/PageHeader";
 import { services } from "@/data/services";
@@ -6,12 +6,12 @@ import Link from "next/link";
 
 const iconMap: Record<string, any> = {
   HeartPulse,
-  Globe,
-  Stethoscope,
   Smile,
   BookOpen,
   Leaf,
-  Brain
+  Brain,
+  BookOpenCheck,
+  HandHeart
 };
 
 export default function ServicesPage() {
@@ -25,7 +25,7 @@ export default function ServicesPage() {
             const Icon = iconMap[service.icon] || HeartPulse;
 
             return (
-              <div key={service.id} className={`flex flex-col md:flex-row gap-16 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+              <div key={service.id} className={`flex flex-col md:flex-row gap-10 md:gap-16 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
                 <div className="flex-1">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-8">
                     <Icon className="h-8 w-8 text-primary" />
@@ -34,6 +34,17 @@ export default function ServicesPage() {
                   <p className="text-lg text-black mb-8 leading-relaxed font-light">
                     {service.description}
                   </p>
+
+                  {/* Mobile Image */}
+                  <div className="md:hidden w-full bg-gray-50 rounded-lg h-[300px] relative overflow-hidden shadow-lg mb-8">
+                    <Image
+                      src={service.image}
+                      alt={`${service.title} Image`}
+                      fill
+                      sizes="100vw"
+                      className="object-cover"
+                    />
+                  </div>
 
                   {/* Preview of top-level items */}
                   <ul className="space-y-4 mb-8">
@@ -57,7 +68,7 @@ export default function ServicesPage() {
                   </Link>
                 </div>
 
-                <div className="w-full md:w-1/2 bg-gray-50 rounded-lg h-[450px] relative overflow-hidden group shadow-lg shrink-0">
+                <div className="hidden md:block w-full md:w-1/2 bg-gray-50 rounded-lg h-[450px] relative overflow-hidden group shadow-lg shrink-0">
                   <Image
                     src={service.image}
                     alt={`${service.title} Image`}

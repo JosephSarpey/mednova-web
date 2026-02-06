@@ -39,10 +39,10 @@ export default function Footer() {
               <a href="https://www.facebook.com/MedNova" target="_blank" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">
                 <Facebook className="h-4 w-4" />
               </a>
-              <a href="#" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">
+              <a href="#" target="_blank" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">
                 <Twitter className="h-4 w-4" />
               </a>
-              <a href="#" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">
+              <a href="https://www.linkedin.com/company/mednovaplus-inc/" target="_blank" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">
                 <Linkedin className="h-4 w-4" />
               </a>
               <a href="https://www.instagram.com/mednova_clinic" target="_blank" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">
