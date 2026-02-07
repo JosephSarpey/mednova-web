@@ -1,34 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
-import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
-const testimonials = [
-    {
-        id: 1,
-        content: "Mednova+ Inc. provided exceptional service. Their holistic approach helped me improve my lifestyle and overall health significantly. I highly recommend their dedicated team.",
-        author: "James Anderson",
-        role: "Patient",
-        image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-    },
-    {
-        id: 2,
-        content: "The corporate wellness program designed by Mednova+ for our company has been a game-changer. Our employees are healthier, happier, and more productive.",
-        author: "Sarah Mitchell",
-        role: "HR Director, TechCorp",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-    },
-    {
-        id: 3,
-        content: "Prof. Lloyd Okine's expertise in public health consultancy is unmatched. His insights were invaluable for our community health initiative.",
-        author: "David Osei",
-        role: "Community Leader",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-    }
-];
+import { testimonials } from "@/data/testimonials";
 
 const variants = {
     enter: (direction: number) => ({
@@ -56,6 +35,7 @@ const swipePower = (offset: number, velocity: number) => {
 };
 
 export default function TestimonialSection() {
+    const displayTestimonials = testimonials.slice(0, 3);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
 
@@ -63,11 +43,11 @@ export default function TestimonialSection() {
         setDirection(newDirection);
         setCurrentIndex((prevIndex) => {
             let nextIndex = prevIndex + newDirection;
-            if (nextIndex < 0) nextIndex = testimonials.length - 1;
-            if (nextIndex >= testimonials.length) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = displayTestimonials.length - 1;
+            if (nextIndex >= displayTestimonials.length) nextIndex = 0;
             return nextIndex;
         });
-    }, []);
+    }, [displayTestimonials.length]);
 
     // Auto-advance
     useEffect(() => {
@@ -117,24 +97,33 @@ export default function TestimonialSection() {
                                 <Quote className="absolute top-8 left-8 h-8 w-8 text-primary/20" />
 
                                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                                    <div className="w-16 h-16 rounded-full border-4 border-white shadow-md overflow-hidden bg-gray-200">
-                                        <Image
-                                            src={testimonials[currentIndex].image}
-                                            alt={testimonials[currentIndex].author}
-                                            width={64}
-                                            height={64}
-                                            className="w-full h-full object-cover"
-                                        />
+                                    <div className="w-16 h-16 rounded-full border-4 border-white shadow-md overflow-hidden bg-primary/10 flex items-center justify-center">
+                                        {displayTestimonials[currentIndex].image ? (
+                                            <Image
+                                                src={displayTestimonials[currentIndex].image}
+                                                alt={displayTestimonials[currentIndex].author}
+                                                width={64}
+                                                height={64}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <span className="text-xl font-bold text-primary">
+                                                {displayTestimonials[currentIndex].author
+                                                    .split(" ")
+                                                    .map((n) => n[0])
+                                                    .join("")}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
 
                                 <div className="mt-8">
                                     <p className="text-lg md:text-xl text-heading font-light leading-relaxed mb-6 italic select-none">
-                                        "{testimonials[currentIndex].content}"
+                                        "{displayTestimonials[currentIndex].content}"
                                     </p>
                                     <div>
-                                        <h4 className="text-lg font-bold uppercase tracking-wider text-primary">{testimonials[currentIndex].author}</h4>
-                                        <p className="text-gray-500 text-sm font-medium">{testimonials[currentIndex].role}</p>
+                                        <h4 className="text-lg font-bold uppercase tracking-wider text-primary">{displayTestimonials[currentIndex].author}</h4>
+                                        <p className="text-gray-500 text-sm font-medium">{displayTestimonials[currentIndex].role}</p>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +142,7 @@ export default function TestimonialSection() {
                     </button>
 
                     <div className="flex space-x-2 z-10">
-                        {testimonials.map((_, idx) => (
+                        {displayTestimonials.map((_, idx) => (
                             <button
                                 key={idx}
                                 onClick={() => {
@@ -176,6 +165,16 @@ export default function TestimonialSection() {
                     >
                         <ChevronRight className="h-5 w-5" />
                     </button>
+                </div>
+
+                <div className="mt-12 text-center">
+                    <Link
+                        href="/testimonials"
+                        className="inline-flex items-center text-primary font-bold uppercase tracking-wider hover:text-heading transition-colors group"
+                    >
+                        View All Testimonials
+                        <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                    </Link>
                 </div>
             </div>
         </section>

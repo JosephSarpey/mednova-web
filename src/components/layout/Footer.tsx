@@ -33,7 +33,7 @@ export default function Footer() {
               <h2 className="text-2xl font-bold font-serif m-0">MEDNOVA+ INC.</h2>
             </div>
             <p className="text-gray-400 mb-8 leading-7">
-              Leading the way in holistic health, lifestyle medicine, and public health consultancy. Committed to improving quality of life globally.
+              At Mednova+, Health means love. Leading the way in holistic health, lifestyle medicine, and public health consultancy. Committed to improving quality of life globally.
             </p>
             <div className="flex space-x-3">
               <a href="https://www.facebook.com/MedNova" target="_blank" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">

@@ -113,7 +113,7 @@ export default function GhanaPage() {
               <Tabs defaultValue="services" className="w-full">
                 <TabsList className="w-full justify-start mb-8 bg-gray-100 p-1.5 h-auto flex-wrap">
                   <TabsTrigger value="services" className="flex-1 min-w-[120px]">General Services</TabsTrigger>
-                  <TabsTrigger value="med-psycho" className="flex-1 min-w-[120px]">Med Psycho</TabsTrigger>
+                  <TabsTrigger value="med-psycho" className="flex-1 min-w-[120px]">Med Psychotherapy</TabsTrigger>
                   <TabsTrigger value="partners" className="flex-1 min-w-[120px]">Partner Labs</TabsTrigger>
                 </TabsList>
 
@@ -158,7 +158,7 @@ export default function GhanaPage() {
               </AccordionItem>
 
               <AccordionItem
-                title="Med Psycho"
+                title="Med Psychotherapy"
                 isOpen={activeAccordion === 'med-psycho'}
                 onClick={() => setActiveAccordion(activeAccordion === 'med-psycho' ? null : 'med-psycho')}
               >

@@ -24,6 +24,9 @@
   --input: 214.3 31.8% 91.4%;
   --ring: 222.2 84% 4.9%;
   --radius: 0.5rem;
+  
+  /* MedNova Green */
+  --tertiary: 142 71% 45%; 
 }
 
 @theme inline {
@@ -37,6 +40,10 @@
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
+  
+  /* Tertiary/Green Color */
+  --color-tertiary: hsl(var(--tertiary));
+  --color-mednova-green: hsl(var(--tertiary));
   
   /* Heading Color */
   --color-heading: #3E4241;

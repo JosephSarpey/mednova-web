@@ -104,8 +104,7 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div className="bg-white rounded-sm shadow-2xl p-10 border border-gray-100 h-fit">
-            <h3 className="text-[15px] font-bold text-[#3E4241] mb-2 uppercase tracking-wider">Get in Touch</h3>
-            <h2 className="text-4xl font-serif font-bold text-gray-900 mb-8 capitalize">Send Us A Message</h2>
+            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8 capitalize">Send Us A Message</h2>
             <ConsultationForm />
           </div>
         </div>

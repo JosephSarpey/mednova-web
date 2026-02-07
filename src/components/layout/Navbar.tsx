@@ -17,9 +17,10 @@ const mainNav = [
 ];
 
 const pagesDropdown = [
-  { href: "/education", label: "Education" },
   { href: "/team", label: "Our Team" },
+  { href: "/education", label: "Education" },
   { href: "/blog", label: "Blog" },
+  { href: "/testimonials", label: "Testimonials" },
 ];
 
 export default function Navbar() {
@@ -184,7 +185,7 @@ export default function Navbar() {
               className="block w-full text-left px-3 py-2 text-primary uppercase mt-4 bg-gray-50"
               onClick={() => setIsOpen(false)}
             >
-              Make an Appointment
+              Book an Appointment
             </Link>
           </div>
         </div>

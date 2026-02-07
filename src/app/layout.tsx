@@ -21,7 +21,7 @@ const unna = Unna({
 
 export const metadata: Metadata = {
   title: "Mednova+ Inc.",
-  description: "Comprehensive Healthcare Services, Dental Care & Public Health Consultancy",
+  description: "At Mednova+, Health means love. Comprehensive Healthcare Services, Dental Care & Public Health Consultancy",
   icons: {
     icon: '/logo.jpg',
   },

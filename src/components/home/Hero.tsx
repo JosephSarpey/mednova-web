@@ -6,15 +6,65 @@ import * as motion from "framer-motion/client";
 
 export default function Hero() {
   return (
-    <div className="relative bg-gradient-to-br from-blue-50 to-white min-h-screen w-full flex items-center overflow-hidden pt-12 lg:pt-0">
+    <div className="relative bg-white min-h-screen w-full flex items-center overflow-hidden pt-12 lg:pt-0">
+
+      {/* Abstract Background Elements - Soft light blue and white fluid waves */}
+      <div className="absolute inset-0 z-0">
+        <svg
+          viewBox="0 0 1440 800"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute top-0 left-0 w-full h-full object-cover opacity-60"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <path
+            d="M0 100C320 50 480 250 800 200C1120 150 1280 50 1440 100V800H0V100Z"
+            fill="url(#paint0_linear_hero)"
+          />
+          <path
+            d="M0 200C400 150 600 350 900 300C1200 250 1300 150 1440 200V800H0V200Z"
+            fill="url(#paint1_linear_hero)"
+            style={{ opacity: 0.5 }}
+          />
+          <defs>
+            <linearGradient
+              id="paint0_linear_hero"
+              x1="720"
+              y1="0"
+              x2="720"
+              y2="800"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#E0F2FE" />
+              <stop offset="1" stopColor="white" />
+            </linearGradient>
+            <linearGradient
+              id="paint1_linear_hero"
+              x1="720"
+              y1="100"
+              x2="720"
+              y2="800"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#F0F9FF" />
+              <stop offset="1" stopColor="white" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Floating soft bokeh elements */}
+        <div className="absolute top-[20%] left-[10%] w-64 h-64 bg-blue-100/30 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-[20%] right-[10%] w-96 h-96 bg-blue-50/40 rounded-full blur-3xl" />
+        <div className="absolute top-[40%] right-[30%] w-48 h-48 bg-primary/5 rounded-full blur-2xl" />
+      </div>
 
       {/* Background Decorative Blobs */}
-      <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px]" />
+      <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse z-0" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] z-0" />
 
       {/* Subtle Background Watermark on Left */}
-      <div className="absolute left-10 top-1/2 -translate-y-1/2 select-none pointer-events-none z-0 hidden lg:block">
-        <span className="text-[200px] font-bold text-primary/5 leading-none tracking-tighter">
+      <div className="absolute left-10 top-1/2 -translate-y-1/2 select-none pointer-events-none z-0 hidden lg:block opacity-30">
+        <span className="text-[200px] font-bold text-mednova-green/30 leading-none tracking-tighter">
           MEDNOVA+
         </span>
       </div>
@@ -42,11 +92,11 @@ export default function Hero() {
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tight mb-6 leading-[1.1] text-secondary">
               <span className="block text-secondary">We care about</span>
-              <span className="block text-primary">your health</span>
+              <span className="block text-mednova-green">your health</span>
             </h1>
 
             <p className="text-lg text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              Mednova+ Inc. provides premier healthcare solutions, expert dental services, and strategic public health consultancy to improve quality of life.
+              At Mednova+, Health means love. We provide premier healthcare solutions, expert dental services, and strategic public health consultancy to improve quality of life.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -107,8 +157,8 @@ export default function Hero() {
               className="absolute -bottom-4 -right-2 sm:bottom-0 sm:right-0 lg:bottom-10 lg:-right-4 z-30 w-16 h-16 sm:w-20 sm:h-20"
             >
               <Image
-                src="/3d-pills.jpeg"
-                alt="3d-pills"
+                src="/3d-pill.jpg"
+                alt="3d-pill"
                 width={150}
                 height={150}
                 className="w-full h-full object-cover rounded-full"
@@ -122,8 +172,8 @@ export default function Hero() {
               className="absolute -top-10 right-0 sm:top-0 sm:right-6 lg:-top-4 lg:right-10 z-30 w-14 h-14 sm:w-18 sm:h-18 flex items-center justify-center"
             >
               <Image
-                src="/3d-heartbeat.jpg"
-                alt="3d-heartbeat"
+                src="/3d-heartpulse.jpg"
+                alt="3d-heartpulse"
                 width={100}
                 height={100}
                 className="w-full h-full object-contain rounded-full"
