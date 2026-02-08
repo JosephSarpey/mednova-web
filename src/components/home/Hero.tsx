@@ -64,7 +64,7 @@ export default function Hero() {
 
       {/* Subtle Background Watermark on Left */}
       <div className="absolute left-10 top-1/2 -translate-y-1/2 select-none pointer-events-none z-0 hidden lg:block opacity-30">
-        <span className="text-[200px] font-bold text-mednova-green/30 leading-none tracking-tighter">
+        <span className="text-[200px] font-bold text-mednova-green/20 leading-none tracking-tighter">
           MEDNOVA+
         </span>
       </div>
@@ -199,14 +199,14 @@ export default function Hero() {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-10 -right-6 sm:top-20 sm:-right-10 lg:top-24 lg:-right-4 bg-white/90 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] z-20 flex items-center gap-2 sm:gap-3"
+              className="absolute top-10 right-0 sm:top-20 sm:-right-10 lg:top-24 lg:-right-4 bg-white/90 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] z-20 flex items-center gap-2 sm:gap-3 max-w-[160px] sm:max-w-none"
             >
               <div className="bg-secondary p-1.5 rounded-full text-white">
                 <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               </div>
               <div>
                 <p className="font-bold text-secondary text-[10px] sm:text-xs">24/7 Support</p>
-                <p className="text-[9px] sm:text-[10px] text-primary font-bold">+1 (914) 616-6162</p>
+                <p className="text-[9px] sm:text-[10px] text-primary font-bold whitespace-nowrap">+1 (914) 616-6162</p>
               </div>
             </motion.div>
 

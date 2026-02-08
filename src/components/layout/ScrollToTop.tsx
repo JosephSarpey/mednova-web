@@ -7,7 +7,7 @@ const ScrollToTop = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleVisibility = () => {
-        if (window.scrollY > 300) {
+        if (typeof window !== 'undefined' && window.scrollY > 300) {
             setIsVisible(true);
         } else {
             setIsVisible(false);
@@ -15,14 +15,26 @@ const ScrollToTop = () => {
     };
 
     const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
+        if (typeof window !== 'undefined') {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
     };
 
     useEffect(() => {
-        window.addEventListener('scroll', toggleVisibility);
+        // Check if window is available (client-side only)
+        if (typeof window === 'undefined') return;
+
+        // Use passive event listener for better scroll performance
+        const options: AddEventListenerOptions = { passive: true };
+
+        window.addEventListener('scroll', toggleVisibility, options);
+
+        // Check initial scroll position
+        toggleVisibility();
+
         return () => {
             window.removeEventListener('scroll', toggleVisibility);
         };

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { X, Search, FileText, Activity, ArrowRight } from "lucide-react";
+import { X, Search, FileText, Activity, ArrowRight, HeartHandshake } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { services, Service } from "@/data/services";
@@ -51,15 +51,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     useEffect(() => {
         if (isOpen) {
             inputRef.current?.focus();
+            // Store original overflow value
+            const originalOverflow = document.body.style.overflow;
             document.body.style.overflow = "hidden";
+
+            return () => {
+                // Restore original overflow value on cleanup
+                document.body.style.overflow = originalOverflow;
+            };
         } else {
-            document.body.style.overflow = "unset";
             setQuery("");
             setResults([]);
         }
-        return () => {
-            document.body.style.overflow = "unset";
-        };
     }, [isOpen]);
 
     useEffect(() => {
@@ -191,13 +194,13 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                         className="group flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all"
                                                     >
                                                         <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                                                            <Activity className="w-5 h-5" />
+                                                            <HeartHandshake className="w-5 h-5 text-primary group-hover:text-white" />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
                                                             <h4 className="text-sm font-semibold text-secondary truncate">{(r.data as Service).title}</h4>
                                                             <p className="text-xs text-gray-500 truncate mt-0.5">{(r.data as Service).description}</p>
                                                         </div>
-                                                        <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-primary transition-colors" />
+                                                        <ArrowRight className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
                                                     </Link>
                                                 ))}
                                             </div>
@@ -216,14 +219,14 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                         onClick={onClose}
                                                         className="group flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all"
                                                     >
-                                                        <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center shrink-0 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                                                            <Activity className="w-5 h-5 text-orange-600 group-hover:text-white" />
+                                                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                                                            <Activity className="w-5 h-5 text-primary group-hover:text-white" />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
                                                             <h4 className="text-sm font-semibold text-secondary truncate">{(r.data as PageResult).title}</h4>
                                                             <p className="text-xs text-gray-500 truncate mt-0.5">{(r.data as PageResult).description}</p>
                                                         </div>
-                                                        <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-primary transition-colors" />
+                                                        <ArrowRight className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
                                                     </Link>
                                                 ))}
                                             </div>
@@ -242,14 +245,14 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                         onClick={onClose}
                                                         className="group flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all"
                                                     >
-                                                        <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent group-hover:text-white transition-colors">
-                                                            <FileText className="w-5 h-5" />
+                                                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                                                            <FileText className="w-5 h-5 text-primary group-hover:text-white" />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
                                                             <h4 className="text-sm font-semibold text-secondary truncate">{(r.data as BlogPost).title}</h4>
                                                             <p className="text-xs text-gray-500 truncate mt-0.5">{(r.data as BlogPost).excerpt}</p>
                                                         </div>
-                                                        <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-primary transition-colors" />
+                                                        <ArrowRight className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
                                                     </Link>
                                                 ))}
                                             </div>
