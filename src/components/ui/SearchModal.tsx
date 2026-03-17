@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { X, Search, FileText, Activity, ArrowRight, HeartHandshake } from "lucide-react";
+import { X, Search, FileText, Activity, ArrowRight, HeartHandshake, Link2, Sheet, NotebookText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { services, Service } from "@/data/services";
 import { blogPosts, BlogPost } from "@/data/blog-posts";
 import { cn } from "@/lib/utils";
@@ -33,10 +34,14 @@ const searchablePages: PageResult[] = [
     { title: "Our Team", href: "/team", description: "Meet our dedicated professionals" },
     { title: "Contact Us", href: "/contact", description: "Get in touch with us for inquiries or appointments" },
     { title: "Education & Training", href: "/education", description: "Learning resources and health education" },
-    { title: "Ghana Branch", href: "/ghana", description: "Information about our operations in Ghana" },
+    { title: "Ghana Partners", href: "/ghana", description: "Information about our operations in Ghana" },
     { title: "Latest News", href: "/blog", description: "Stay updated with our latest articles and announcements" },
     { title: "Privacy Policy", href: "/privacy", description: "How we handle your data" },
     { title: "Terms of Service", href: "/terms", description: "Rules for using our services" },
+    { title: "Forms Directory", href: "/form", description: "Access and submit required forms for Mednova+ services." },
+    { title: "Client Medical History Form", href: "/form/medical-history", description: "Provide your medical history for comprehensive evaluation." },
+    { title: "Psychotherapy Intake Form", href: "/form/psychotherapy-intake", description: "Complete this intake form prior to your first psychotherapy session." },
+    { title: "Webinar Registration Form", href: "/form/webinar-registration", description: "Register for upcoming Mednova+ educational webinars." },
 ];
 interface SearchModalProps {
     isOpen: boolean;
@@ -48,9 +53,13 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const [results, setResults] = useState<SearchResult[]>([]);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    const [selectedIndex, setSelectedIndex] = useState(-1);
+    const router = useRouter();
+
     useEffect(() => {
         if (isOpen) {
             inputRef.current?.focus();
+            setSelectedIndex(-1);
             // Store original overflow value
             const originalOverflow = document.body.style.overflow;
             document.body.style.overflow = "hidden";
@@ -62,16 +71,58 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         } else {
             setQuery("");
             setResults([]);
+            setSelectedIndex(-1);
         }
     }, [isOpen]);
 
     useEffect(() => {
-        const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === "Escape") onClose();
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (!isOpen) return;
+
+            if (e.key === "Escape") {
+                onClose();
+                return;
+            }
+
+            const itemsCount = query ? results.length : Math.min(4, services.length);
+
+            if (itemsCount > 0) {
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    setSelectedIndex(prev => (prev < itemsCount - 1 ? prev + 1 : prev));
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    setSelectedIndex(prev => (prev > 0 ? prev - 1 : prev));
+                } else if (e.key === "Enter" && selectedIndex >= 0) {
+                    e.preventDefault();
+                    let href = "";
+                    if (query) {
+                        const selectedResult = results[selectedIndex];
+                        if (selectedResult.type === 'service') {
+                            href = `/services/${(selectedResult.data as Service).slug}`;
+                        } else if (selectedResult.type === 'page') {
+                            href = (selectedResult.data as PageResult).href;
+                        } else if (selectedResult.type === 'blog') {
+                            href = `/blog/${(selectedResult.data as BlogPost).id}`;
+                        }
+                    } else {
+                        const selectedService = services.slice(0, 4)[selectedIndex];
+                        if (selectedService) {
+                            href = `/services/${selectedService.slug}`;
+                        }
+                    }
+
+                    if (href) {
+                        router.push(href);
+                        onClose();
+                    }
+                }
+            }
         };
-        window.addEventListener("keydown", handleEsc);
-        return () => window.removeEventListener("keydown", handleEsc);
-    }, [onClose]);
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, onClose, query, results, selectedIndex, router]);
 
     useEffect(() => {
         if (query.trim().length < 2) {
@@ -106,6 +157,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             .map(p => ({ type: 'page', data: p }));
 
         setResults([...filteredServices, ...filteredBlogs, ...filteredPages]);
+        setSelectedIndex(-1);
     }, [query]);
 
     return (
@@ -162,15 +214,21 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                 <div className="p-4">
                                     <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Quick Links</h3>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                        {services.slice(0, 4).map(service => (
+                                        {services.slice(0, 4).map((service, index) => (
                                             <Link
                                                 key={service.id}
                                                 href={`/services/${service.slug}`}
                                                 onClick={onClose}
-                                                className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 transition-colors border border-transparent hover:border-primary/10"
+                                                onMouseEnter={() => setSelectedIndex(index)}
+                                                className={cn(
+                                                    "flex items-center gap-3 p-3 rounded-xl transition-colors border",
+                                                    selectedIndex === index
+                                                        ? "bg-primary/5 border-primary/30"
+                                                        : "border-transparent hover:bg-primary/5 hover:border-primary/10"
+                                                )}
                                             >
                                                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                                                    <Activity className="w-4 h-4 text-primary" />
+                                                    <Link2 className="w-4 h-4 text-primary" />
                                                 </div>
                                                 <span className="text-sm font-medium text-secondary">{service.title}</span>
                                             </Link>
@@ -186,23 +244,32 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                         <div>
                                             <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Services</h3>
                                             <div className="space-y-1">
-                                                {results.filter(r => r.type === 'service').map(r => (
+                                                {results.map((r, index) => r.type === 'service' ? (
                                                     <Link
                                                         key={(r.data as Service).id}
                                                         href={`/services/${(r.data as Service).slug}`}
                                                         onClick={onClose}
-                                                        className="group flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all"
+                                                        onMouseEnter={() => setSelectedIndex(index)}
+                                                        className={cn(
+                                                            "group flex items-center gap-4 p-3 rounded-xl transition-all border",
+                                                            selectedIndex === index
+                                                                ? "bg-primary/5 border-primary/30"
+                                                                : "border-transparent hover:bg-primary/5"
+                                                        )}
                                                     >
-                                                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                                                            <HeartHandshake className="w-5 h-5 text-primary group-hover:text-white" />
+                                                        <div className={cn(
+                                                            "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors",
+                                                            selectedIndex === index ? "bg-primary text-white" : "bg-primary/10 group-hover:bg-primary group-hover:text-white"
+                                                        )}>
+                                                            <HeartHandshake className={cn("w-5 h-5", selectedIndex === index ? "text-white" : "text-primary group-hover:text-white")} />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
                                                             <h4 className="text-sm font-semibold text-secondary truncate">{(r.data as Service).title}</h4>
                                                             <p className="text-xs text-gray-500 truncate mt-0.5">{(r.data as Service).description}</p>
                                                         </div>
-                                                        <ArrowRight className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
+                                                        <ArrowRight className={cn("w-4 h-4 transition-colors", selectedIndex === index ? "text-primary" : "text-primary/60 group-hover:text-primary")} />
                                                     </Link>
-                                                ))}
+                                                ) : null)}
                                             </div>
                                         </div>
                                     )}
@@ -210,25 +277,34 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                     {/* Page Results */}
                                     {results.some(r => r.type === 'page') && (
                                         <div>
-                                            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Pages</h3>
+                                            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2 mt-4">Pages</h3>
                                             <div className="space-y-1">
-                                                {results.filter(r => r.type === 'page').map((r, idx) => (
+                                                {results.map((r, index) => r.type === 'page' ? (
                                                     <Link
-                                                        key={`page-${idx}`}
+                                                        key={`page-${index}`}
                                                         href={(r.data as PageResult).href}
                                                         onClick={onClose}
-                                                        className="group flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all"
+                                                        onMouseEnter={() => setSelectedIndex(index)}
+                                                        className={cn(
+                                                            "group flex items-center gap-4 p-3 rounded-xl transition-all border",
+                                                            selectedIndex === index
+                                                                ? "bg-primary/5 border-primary/30"
+                                                                : "border-transparent hover:bg-primary/5"
+                                                        )}
                                                     >
-                                                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                                                            <Activity className="w-5 h-5 text-primary group-hover:text-white" />
+                                                        <div className={cn(
+                                                            "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors",
+                                                            selectedIndex === index ? "bg-primary text-white" : "bg-primary/10 group-hover:bg-primary group-hover:text-white"
+                                                        )}>
+                                                            <NotebookText className={cn("w-5 h-5", selectedIndex === index ? "text-white" : "text-primary group-hover:text-white")} />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
                                                             <h4 className="text-sm font-semibold text-secondary truncate">{(r.data as PageResult).title}</h4>
                                                             <p className="text-xs text-gray-500 truncate mt-0.5">{(r.data as PageResult).description}</p>
                                                         </div>
-                                                        <ArrowRight className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
+                                                        <ArrowRight className={cn("w-4 h-4 transition-colors", selectedIndex === index ? "text-primary" : "text-primary/60 group-hover:text-primary")} />
                                                     </Link>
-                                                ))}
+                                                ) : null)}
                                             </div>
                                         </div>
                                     )}
@@ -236,25 +312,34 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                     {/* Blog Results */}
                                     {results.some(r => r.type === 'blog') && (
                                         <div>
-                                            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Articles & News</h3>
+                                            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2 mt-4">Articles & News</h3>
                                             <div className="space-y-1">
-                                                {results.filter(r => r.type === 'blog').map(r => (
+                                                {results.map((r, index) => r.type === 'blog' ? (
                                                     <Link
                                                         key={(r.data as BlogPost).id}
                                                         href={`/blog/${(r.data as BlogPost).id}`}
                                                         onClick={onClose}
-                                                        className="group flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all"
+                                                        onMouseEnter={() => setSelectedIndex(index)}
+                                                        className={cn(
+                                                            "group flex items-center gap-4 p-3 rounded-xl transition-all border",
+                                                            selectedIndex === index
+                                                                ? "bg-primary/5 border-primary/30"
+                                                                : "border-transparent hover:bg-primary/5"
+                                                        )}
                                                     >
-                                                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                                                            <FileText className="w-5 h-5 text-primary group-hover:text-white" />
+                                                        <div className={cn(
+                                                            "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors",
+                                                            selectedIndex === index ? "bg-primary text-white" : "bg-primary/10 group-hover:bg-primary group-hover:text-white"
+                                                        )}>
+                                                            <FileText className={cn("w-5 h-5", selectedIndex === index ? "text-white" : "text-primary group-hover:text-white")} />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
                                                             <h4 className="text-sm font-semibold text-secondary truncate">{(r.data as BlogPost).title}</h4>
                                                             <p className="text-xs text-gray-500 truncate mt-0.5">{(r.data as BlogPost).excerpt}</p>
                                                         </div>
-                                                        <ArrowRight className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
+                                                        <ArrowRight className={cn("w-4 h-4 transition-colors", selectedIndex === index ? "text-primary" : "text-primary/60 group-hover:text-primary")} />
                                                     </Link>
-                                                ))}
+                                                ) : null)}
                                             </div>
                                         </div>
                                     )}

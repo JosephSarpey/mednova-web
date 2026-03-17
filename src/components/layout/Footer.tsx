@@ -36,7 +36,7 @@ export default function Footer() {
               At Mednova+, Health means love. Leading the way in holistic health, lifestyle medicine, and public health consultancy. Committed to improving quality of life globally.
             </p>
             <div className="flex space-x-3">
-              <a href="https://www.facebook.com/MedNova" target="_blank" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">
+              <a href="https://www.facebook.com/share/1ZpbCWBcBD/" target="_blank" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">
                 <Facebook className="h-4 w-4" />
               </a>
               <a href="#" target="_blank" className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full hover:bg-primary transition duration-300">
@@ -68,7 +68,7 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-8 uppercase tracking-wider relative after:content-[''] after:absolute after:left-0 after:-bottom-3 after:w-10 after:h-[2px] after:bg-primary">Connect</h4>
             <ul className="space-y-3">
               <li><Link href="/education" className="text-gray-400 hover:text-primary transition">Education & Training</Link></li>
-              <li><Link href="/ghana" className="text-gray-400 hover:text-primary transition">Ghana Branch</Link></li>
+              <li><Link href="/ghana" className="text-gray-400 hover:text-primary transition">Our Ghana Partners</Link></li>
               <li><Link href="/blog" className="text-gray-400 hover:text-primary transition">Latest News</Link></li>
             </ul>
           </div>

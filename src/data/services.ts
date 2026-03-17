@@ -15,10 +15,10 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: "general-health-wellness",
-    slug: "general-health-wellness",
-    title: "General Health and Wellness Services",
-    description: "Because we are aware that about 60% of all diseases condition including cancer are as a result of lifestyle and behavior, we adapt to an evidence-based, data-driven approach to helping you relieve suffering.",
+    id: "general-holistic-health-wellness",
+    slug: "general-holistic-health-wellness",
+    title: "General Holistic Health and Wellness",
+    description: "Bridging the gap between traditional healthcare and holistic practices. Our evidence-based, data-driven approach integrates mind, body, and spirit to address root causes and empower you to take control of your health through tailored consultations, coaching, and lifestyle care.",
     icon: "HeartPulse",
     image: "/services/healthcare-bg.jpg",
     items: [
@@ -51,7 +51,11 @@ export const services: Service[] = [
           "We will provide you with reliable information rooted in evidence, resources, and educational materials to enhance your understanding of your condition and treatment options.",
           "With this knowledge, you will be equipped to actively participate in your care and make informed decisions."
         ]
-      }
+      },
+      { name: "Personalized nutrition, exercise, and habit coaching" },
+      { name: "Mind-body methods (mindfulness, yoga, meditation)" },
+      { name: "Preventive plans for chronic conditions" },
+      { name: "Full integrative consultations" }
     ]
   },
   {
@@ -82,23 +86,9 @@ export const services: Service[] = [
     ]
   },
   {
-    id: "holistic-medicine",
-    slug: "holistic-lifestyle-medicine",
-    title: "Holistic & Lifestyle Medicine",
-    description: "True wellness integrates mind, body, and spirit. We address root causes via blended traditional and complementary care for enduring health.",
-    icon: "Leaf",
-    image: "/services/holistic_medicine.jpg",
-    items: [
-      { name: "Personalized nutrition, exercise, and habit coaching" },
-      { name: "Mind-body methods (mindfulness, yoga, meditation)" },
-      { name: "Preventive plans for chronic conditions" },
-      { name: "Full integrative consultations" }
-    ]
-  },
-  {
     id: "mental-health",
     slug: "psychotherapy-mental-health",
-    title: "Psychotherapy & Mental Health",
+    title: "Psychotherapy & Mental Health Coaching/Support",
     description: "Mental health underpins total well-being. We deliver empathetic, evidence-based aid for life's hurdles via licensed therapists and coaches.",
     icon: "Brain",
     image: "/services/mental_health_bg.jpg",

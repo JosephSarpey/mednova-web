@@ -46,9 +46,9 @@ export const blogPosts: BlogPost[] = [
       <p>By taking a holistic approach to your health, you're not just preventing disease; you're creating a foundation for a vibrant, fulfilling life.</p>
     `,
     date: "Dec 28, 2024",
-    author: "Dr. Lloyd Okine",
-    authorRole: "Medical Director",
-    authorImage: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    author: "Dr. P. Edem Nukunu",
+    authorRole: "Neuropsychotherapist",
+    authorImage: "/team/dr_edem.jpg",
     image: "https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Wellness",
     tags: ["Holistic", "Wellness", "Lifestyle", "Prevention"]
@@ -86,9 +86,9 @@ export const blogPosts: BlogPost[] = [
       <p>By implementing these strategies, you can take control of your stress levels and improve your quality of life. Remember, managing stress is not about eliminating it entirely but about building resilience and finding healthy ways to cope.</p>
     `,
     date: "Dec 20, 2024",
-    author: "Dr. Sarah Johnson",
-    authorRole: "Consultant Physician",
-    authorImage: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    author: "Dr. Simon Arthur",
+    authorRole: "Lifestyle Medicine Specialist",
+    authorImage: "/team/dr_simon.jpg",
     image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Lifestyle",
     tags: ["Stress Management", "Mental Health", "Productivity"]
@@ -115,9 +115,9 @@ export const blogPosts: BlogPost[] = [
       <p>At Mednova+, we believe that a healthy community is the bedrock of a prosperous society. By working together with local leaders, health professionals, and residents, we can create environments that support health for everyone.</p>
     `,
     date: "Dec 15, 2024",
-    author: "Dr. Michael Chen",
-    authorRole: "Epidemiologist",
-    authorImage: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    author: "Dr. Zipporah Oparebea Nukunu",
+    authorRole: "Healthcare Operations Consultant and Director",
+    authorImage: "/team/dr_zipporah.jpg",
     image: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Public Health",
     tags: ["Community", "Public Health", "Prevention", "Education"]
@@ -151,9 +151,9 @@ export const blogPosts: BlogPost[] = [
       <p>Remember, a heart-healthy diet is most effective when combined with regular physical activity and a smoke-free lifestyle. Consult with your doctor or a registered dietitian to create a personalized nutrition plan that works for you.</p>
     `,
     date: "Dec 10, 2024",
-    author: "Dr. Emily Williams",
-    authorRole: "Nutrition Specialist",
-    authorImage: "https://images.unsplash.com/photo-1559839734-2b71f1536780?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    author: "Dr. P. Edem Nukunu",
+    authorRole: "Neuropsychotherapist",
+    authorImage: "/team/dr_edem.jpg",
     image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Nutrition",
     tags: ["Heart Health", "Nutrition", "Healthy Eating", "Diet"]

@@ -5,10 +5,18 @@ import { FormEvent, useCallback, useState } from "react";
 
 export default function ConsultationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'rate-limited'>('idle');
 
   const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+
+    const lastSubmitTime = localStorage.getItem('contactFormLastSubmit');
+    if (lastSubmitTime && Date.now() - parseInt(lastSubmitTime) < 300000) {
+      setSubmitStatus('rate-limited');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -33,7 +41,8 @@ export default function ConsultationForm() {
 
       if (response.ok) {
         setSubmitStatus('success');
-        e.currentTarget.reset();
+        localStorage.setItem('contactFormLastSubmit', Date.now().toString());
+        form.reset();
         // Reset success message after 5 seconds
         setTimeout(() => setSubmitStatus('idle'), 5000);
       } else {
@@ -140,6 +149,10 @@ export default function ConsultationForm() {
       </div>
 
       {/* Status Messages */}
+      <div className="p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-800 text-sm">
+        Please fill the form accurately. You can only submit once every 5 minutes.
+      </div>
+      
       {submitStatus === 'success' && (
         <div className="p-4 bg-green-50 border border-green-200 rounded-md text-green-800 text-sm">
           ✓ Thank you! Your message has been sent successfully. We'll get back to you soon.
@@ -149,6 +162,12 @@ export default function ConsultationForm() {
       {submitStatus === 'error' && (
         <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-800 text-sm">
           ✗ Oops! Something went wrong. Please try again or contact us directly.
+        </div>
+      )}
+
+      {submitStatus === 'rate-limited' && (
+        <div className="p-4 bg-yellow-50 border border-yellow-400 rounded-md text-yellow-800 text-sm">
+          ⚠ Please wait 5 minutes before submitting another request.
         </div>
       )}
 

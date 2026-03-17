@@ -59,7 +59,7 @@ export default function ContactPage() {
             {/* Ghana Branch */}
             <div className="bg-white rounded-lg p-0 pt-6 border-t border-gray-100">
               <h3 className="text-xl font-bold text-heading mb-6 flex items-center font-serif">
-                Ghana Branch
+                Locate Our Ghana Partners
               </h3>
               <ul className="space-y-6">
                 <li className="flex items-start">
@@ -68,7 +68,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-bold text-heading text-[15px] uppercase mb-1">Address</p>
-                    <p className="text-black font-light text-sm">Agbogba-Ashongman Road, Near Police Station<br /> P.O. Box TF 459<br />Trade-Fair, Accra, Ghana</p>
+                    <p className="text-black font-light text-sm">Agbogba-Ashongman Road, Near Police Station<br />Trade-Fair, Accra, Ghana</p>
                   </div>
                 </li>
                 <li className="flex items-center">
@@ -95,7 +95,7 @@ export default function ContactPage() {
                   href="/ghana"
                   className="inline-flex items-center text-primary font-bold uppercase text-xs tracking-widest hover:text-heading transition-colors group"
                 >
-                  Visit our Ghana Branch
+                  Visit our Ghana Partners
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

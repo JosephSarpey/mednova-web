@@ -2,7 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffffc9;
+  --background: #f8f9fa;
   --foreground: #171717;
 
   /* Shadcn HSL Variables */
@@ -24,9 +24,9 @@
   --input: 214.3 31.8% 91.4%;
   --ring: 222.2 84% 4.9%;
   --radius: 0.5rem;
-  
+
   /* MedNova Green */
-  --tertiary: 142 71% 45%; 
+  --tertiary: 142 71% 45%;
 }
 
 @theme inline {
@@ -34,34 +34,34 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-poppins);
   --font-serif: var(--font-unna);
-  
+
   /* Mednova/Aesthetic Brand Colors */
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-  
+
   /* Tertiary/Green Color */
   --color-tertiary: hsl(var(--tertiary));
   --color-mednova-green: hsl(var(--tertiary));
-  
+
   /* Heading Color */
-  --color-heading: #3E4241;
-  
+  --color-heading: #3e4241;
+
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
-  
+
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-  
+
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-  
+
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
-  
+
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));

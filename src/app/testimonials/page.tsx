@@ -80,7 +80,7 @@ export default function TestimonialsPage() {
                                 Your feedback helps us improve and helps others find the care they need. We'd love to hear from you on Google Reviews.
                             </p>
                             <a
-                                href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK_HERE/review"
+                                href="https://share.google/ep83cuDgOlbKsyjt4"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center bg-primary text-white px-10 py-4 rounded-full font-bold uppercase tracking-wider hover:bg-white hover:text-heading transition duration-300 shadow-lg group"

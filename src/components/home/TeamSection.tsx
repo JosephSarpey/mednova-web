@@ -14,10 +14,10 @@ export default function TeamSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {doctors.slice(0, 4).map((doc, index) => (
-            <div key={index} className="group">
-              <div className="relative overflow-hidden rounded-t-lg h-[350px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {doctors.slice(0, 3).map((doc, index) => (
+            <div key={index} className="group h-full flex flex-col">
+              <div className="relative overflow-hidden rounded-t-lg h-[350px] shrink-0">
                 <Image
                   src={doc.image}
                   alt={doc.name}
@@ -32,7 +32,7 @@ export default function TeamSection() {
                   <a href={doc.socials.instagram} className="text-heading hover:text-primary"><Instagram className="h-4 w-4" /></a>
                 </div>
               </div>
-              <div className="bg-white border text-center p-6 rounded-b-lg shadow-sm group-hover:shadow-lg transition duration-300">
+              <div className="flex-1 bg-white border text-center p-6 rounded-b-lg shadow-sm group-hover:shadow-lg transition duration-300 flex flex-col justify-center">
                 <h3 className="text-xl font-bold text-heading font-serif mb-1">{doc.name}</h3>
                 <p className="text-primary text-sm uppercase tracking-wider">{doc.role}</p>
               </div>
@@ -43,9 +43,9 @@ export default function TeamSection() {
         <div className="text-center">
           <Link
             href="/team"
-            className="inline-block border-2 border-heading text-heading px-8 py-3 rounded-md font-bold uppercase tracking-wider hover:bg-heading hover:text-white transition duration-300"
+            className="inline-block border-2 border-primary text-primary px-8 py-3 rounded-md font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition duration-300"
           >
-            View All Doctors
+            View More
           </Link>
         </div>
       </div>

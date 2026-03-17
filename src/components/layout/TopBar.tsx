@@ -21,7 +21,7 @@ export default function TopBar() {
         </div>
 
         <div className="flex items-center space-x-6">
-          <a href="https://www.facebook.com/MedNova" target="_blank" className="hover:text-mednova-green transition"><Facebook className="h-4 w-4" /></a>
+          <a href="https://www.facebook.com/share/1ZpbCWBcBD/" target="_blank" className="hover:text-mednova-green transition"><Facebook className="h-4 w-4" /></a>
           <a href="#" className="hover:text-mednova-green transition" target="_blank"><Twitter className="h-4 w-4" /></a>
           <a href="https://www.linkedin.com/company/mednovaplus-inc/" target="_blank" className="hover:text-mednova-green transition"><Linkedin className="h-4 w-4" /></a>
           <a href="https://www.instagram.com/mednova_clinic" target="_blank" className="hover:text-mednova-green transition"><Instagram className="h-4 w-4" /></a>
