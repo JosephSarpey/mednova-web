@@ -1,86 +1,48 @@
-import { HeartPulse, CheckCircle, Smile, ArrowRight, BookOpen, Leaf, Brain, BookOpenCheck, HandHeart } from "lucide-react";
+import { HeartPulse, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import PageHeader from "@/components/layout/PageHeader";
 import { services } from "@/data/services";
 import Link from "next/link";
-
-const iconMap: Record<string, any> = {
-  HeartPulse,
-  Smile,
-  BookOpen,
-  Leaf,
-  Brain,
-  BookOpenCheck,
-  HandHeart
-};
 
 export default function ServicesPage() {
   return (
     <div className="bg-white min-h-screen">
       <PageHeader title="Our Services" items={[{ label: "Services" }]} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="space-y-24">
-          {services.map((service, index) => {
-            const Icon = iconMap[service.icon] || HeartPulse;
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <p className="text-center max-w-3xl mx-auto text-lg text-black/80 mb-12">
+          We offer a range of services spanning healthcare, public health, education, mental
+          health, and dental laboratory solutions. Select a service to learn more.
+        </p>
 
-            return (
-              <div key={service.id} className={`flex flex-col md:flex-row gap-10 md:gap-16 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
-                <div className="flex-1">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-8">
-                    <Icon className="h-8 w-8 text-primary" />
-                  </div>
-                  <h2 className="text-4xl font-serif font-bold text-heading mb-6">{service.title}</h2>
-                  <p className="text-lg text-black mb-8 leading-relaxed font-light">
-                    {service.description}
-                  </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <Link
+              key={service.id}
+              href={`/services/${service.slug}`}
+              className="group block bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition overflow-hidden"
+            >
+              <div className="relative h-40 w-full bg-gray-50">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              </div>
 
-                  {/* Mobile Image */}
-                  <div className="md:hidden w-full bg-gray-50 rounded-lg h-[300px] relative overflow-hidden shadow-lg mb-8">
-                    <Image
-                      src={service.image}
-                      alt={`${service.title} Image`}
-                      fill
-                      sizes="100vw"
-                      className="object-cover"
-                    />
-                  </div>
-
-                  {/* Preview of top-level items */}
-                  <ul className="space-y-4 mb-8">
-                    {service.items.slice(0, 3).map((item, idx) => (
-                      <li key={idx} className="flex items-center text-black font-medium">
-                        <CheckCircle className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                        <span>{item.name}</span>
-                      </li>
-                    ))}
-                    {service.items.length > 3 && (
-                      <li className="text-gray-500 pl-8">and more...</li>
-                    )}
-                  </ul>
-
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors group"
-                  >
-                    View Detailed Services
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-
-                <div className="hidden md:block w-full md:w-1/2 bg-gray-50 rounded-lg h-[450px] relative overflow-hidden group shadow-lg shrink-0">
-                  <Image
-                    src={service.image}
-                    alt={`${service.title} Image`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover group-hover:scale-105 transition duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-700" />
+              <div className="p-6">
+                <h3 className="text-lg font-semibold text-heading mb-2">{service.navLabel ?? service.title}</h3>
+                <p className="text-sm text-gray-600 mb-4 line-clamp-3">{service.description}</p>
+                <div className="flex items-center text-primary font-medium">
+                  Learn more
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </div>
               </div>
-            );
-          })}
+            </Link>
+          ))}
         </div>
       </div>
     </div>

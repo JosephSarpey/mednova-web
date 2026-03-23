@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -6,6 +7,7 @@ import Image from "next/image";
 import { Menu, X, ChevronDown, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { services } from "@/data/services";
 import SearchModal from "../ui/SearchModal";
 
 const navItems = [
@@ -21,7 +23,9 @@ const navItems = [
   {
     label: "Services",
     dropdown: [
-      { href: "/services", label: "Services" },
+      // { href: "/services", label: "Services" },
+      
+      ...services.map((s) => ({ href: `/services/${s.slug}`, label: s.title, displayLabel: s.navLabel ?? s.title })),
       { href: "/education", label: "Education" },
     ],
   },
@@ -101,19 +105,20 @@ export default function Navbar() {
 
                     {/* Dropdown Menu */}
                     <div className={cn(
-                      "absolute top-full left-0 w-48 bg-white shadow-lg rounded-sm py-2 border-t-2 border-primary transition-all duration-200 origin-top-left",
+                      "absolute top-full left-0 w-64 bg-white shadow-lg rounded-sm py-2 border-t-2 border-primary transition-all duration-200 origin-top-left",
                       openDropdowns[item.label] ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible"
                     )}>
                       {item.dropdown.map((subItem) => (
                         <Link
                           key={subItem.href}
                           href={subItem.href}
+                          title={subItem.label}
                           className={cn(
-                            "block px-4 py-3 text-sm uppercase tracking-wide hover:bg-gray-50 hover:text-primary transition",
+                            "block px-4 py-3 text-sm uppercase tracking-wide hover:bg-gray-50 hover:text-primary transition truncate",
                             pathname === subItem.href ? "text-primary" : "text-secondary"
                           )}
                         >
-                          {subItem.label}
+                          {(subItem as any).displayLabel ?? subItem.label}
                         </Link>
                       ))}
                     </div>
@@ -238,7 +243,7 @@ export default function Navbar() {
               className="block w-full text-center px-3 py-3 text-white uppercase mt-4 bg-primary rounded-md"
               onClick={() => setIsOpen(false)}
             >
-              Book an Appointment
+              Pick A
             </Link>
           </div>
         </div>

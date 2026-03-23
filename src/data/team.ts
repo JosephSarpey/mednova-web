@@ -27,7 +27,7 @@ export const doctors: Doctor[] = [
   {
     slug: "dr-edem",
     name: "Dr. P. Edem Nukunu",
-    role: "Neuropsychotherapist",
+    role: "Holistic Health/Lifestyle Medicine coach and Credential Neuropsychotherapist",
     image: "/team/dr_edem.jpg",
     socials: {
       facebook: "https://www.facebook.com/share/1SXmZ9nAAc/",
@@ -79,7 +79,7 @@ export const doctors: Doctor[] = [
   {
     slug: "dr-simon",
     name: "Dr. Simon Arthur",
-    role: "Lifestyle Medicine Specialist",
+    role: "Resident Surgeon, (GH)",
     image: "/team/dr_simon.jpg",
     socials: {
       facebook: "https://www.facebook.com/share/18BCtaePAC/",
@@ -121,7 +121,7 @@ export const doctors: Doctor[] = [
   },
   {
     slug: "dr-zipporah",
-    name: "Dr. Zipporah Oparebea Nukunu",
+    name: "Zipporah Oparebea Nukunu",
     role: "Healthcare Operations Consultant and Director",
     image: "/team/dr_zipporah.jpg",
     socials: { facebook: "#", twitter: "#", linkedin: "#", instagram: "#" },
