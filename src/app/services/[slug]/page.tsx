@@ -64,6 +64,34 @@ export default async function ServiceDetailPage({ params }: { params: Params }) 
                                 {service.description}
                             </p>
 
+                            {service.slug === "dental-laboratory-services" && (
+                                <div className="space-y-6 mb-8">
+                                    <h2 className="text-2xl font-semibold text-black">Why You Should Choose our Dental Laboratory Services</h2>
+
+                                    <h3 className="text-lg font-medium text-black mt-4">Unmatched Expertise & Experience with Dual Clinical Insight</h3>
+                                    <p className="text-gray-600">
+                                        MedNova+, Inc. brings a level of expertise uniquely suited to New York’s demanding dental environment. With a seasoned dental laboratory technician and a foreign‑trained dentist who is also a certified dental technician, our team provides both the technical mastery and clinical understanding required in one of the most competitive dental markets in the U.S. This dual perspective ensures restorations that meet the highest standards for accuracy, function, esthetics, and regulatory expectations across New York and the entire country.
+                                    </p>
+
+                                    <h3 className="text-lg font-medium text-black">High-Quality, Fully Customized Restorations Designed for U.S. Patients</h3>
+                                    <p className="text-gray-600">
+                                        Every restoration we produce is meticulously crafted to serve the diverse and dynamic patient population of New York and the U.S. market. From culturally varied esthetic demands to advanced restorative needs, we tailor each denture, nightguard, implant-supported prosthesis, and orthodontic appliance to the patient’s anatomy, lifestyle, and oral health requirements. Our commitment to top-tier materials and precision fabrication ensures products that are durable, natural-looking, and aligned with the expectations of American dental care standards.
+                                    </p>
+
+                                    <h3 className="text-lg font-medium text-black">Comprehensive Support & Advisory Partnership for Modern U.S. Practices</h3>
+                                    <p className="text-gray-600">
+                                        We understand the fast-paced, technology-driven nature of U.S. dental practices—especially in New York. That’s why we go beyond fabrication, partnering closely with clinicians to offer case planning, treatment coordination, digital workflow integration, and chairside‑informed guidance. Whether you're navigating complex implant cases, digital impressions, or full‑mouth rehabilitation, our collaborative approach strengthens your practice, reduces barriers, and supports superior patient outcomes.
+                                    </p>
+
+                                    <h3 className="text-lg font-medium text-black">Rapid, Reliable & Patient‑Centered Service With Quick Turnaround Times</h3>
+                                    <p className="text-gray-600">
+                                        New York patients and practices expect efficiency—and we deliver. Our streamlined processes, digital CAD/CAM capabilities, and responsive communication enable quick turnaround times without compromising quality. Whether you need expedited denture repairs, fast-tracked appliances, or consistent scheduling reliability, MedNova+ keeps your practice moving. Our focus on precision and punctuality helps you reduce chair time, manage patient expectations, and maintain a rhythm that matches the pace of New York dentistry.
+                                    </p>
+
+                                    <p className="text-gray-800 font-semibold">We deliver on our promise.</p>
+                                </div>
+                            )}
+
                             {/* Mobile Image */}
                             <div className="lg:hidden rounded-2xl h-[300px] w-full relative overflow-hidden shadow-lg mb-12">
                                 <Image

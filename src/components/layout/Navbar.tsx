@@ -243,7 +243,7 @@ export default function Navbar() {
               className="block w-full text-center px-3 py-3 text-white uppercase mt-4 bg-primary rounded-md"
               onClick={() => setIsOpen(false)}
             >
-              Pick A
+              Pick A Form
             </Link>
           </div>
         </div>
