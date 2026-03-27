@@ -133,6 +133,22 @@ export default function ConsultationForm() {
         </div>
       </div>
 
+      {/* Country Input */}
+      <div>
+        <label htmlFor="contact-country" className="sr-only">Country</label>
+        <input
+          id="contact-country"
+          name="country"
+          type="text"
+          placeholder="Country"
+          autoComplete="country-name"
+          required
+          aria-required="true"
+          disabled={isSubmitting}
+          className="w-full px-4 py-3 bg-transparent border-b border-[#e1e1e1] text-[#3E4241] placeholder-gray-600 focus:outline-none focus:border-primary transition disabled:opacity-50"
+        />
+      </div>
+
       {/* Message Textarea */}
       <div>
         <label htmlFor="contact-message" className="sr-only">Your Message</label>

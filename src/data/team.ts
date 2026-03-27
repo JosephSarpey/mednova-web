@@ -123,7 +123,7 @@ export const doctors: Doctor[] = [
     slug: "dr-zipporah",
     name: "Zipporah Oparebea Nukunu",
     role: "Healthcare Operations Consultant and Director",
-    image: "/team/dr_zipporah.jpg",
+    image: "/team/zipporah.jpg",
     socials: { facebook: "#", twitter: "#", linkedin: "#", instagram: "#" },
     profile: {
       bio: [

@@ -35,8 +35,9 @@ export default function EducationPage() {
           <div className="text-center mb-16">
             <p className="text-primary font-bold uppercase tracking-[2px] text-sm mb-3">Learn With Us</p>
             <h2 className="text-4xl font-serif font-bold text-heading sm:text-5xl mb-6">
-              Featured Courses (Dummy Data)
+              Featured Courses
             </h2>
+            <h4 className="font-serif font-bold text-heading sm:text-5xl text-gray-800">(Coming Soon)</h4>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -83,7 +84,7 @@ export default function EducationPage() {
               </p>
             </div>
             <Link
-              href="/contact"
+              href="/resources"
               className="inline-flex items-center px-8 py-4 bg-primary text-white font-bold uppercase tracking-widest hover:bg-white hover:text-primary transition duration-300 whitespace-nowrap"
             >
               Access Library <Download className="ml-2 h-4 w-4" />

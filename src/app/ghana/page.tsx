@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   MapPin, Phone, Mail, FlaskConical, Users, ShieldCheck,
   MessageCircle, Brain, Stethoscope, HeartPulse, Activity,
-  ChevronDown, ChevronUp
+  ChevronDown, ChevronUp, FileText, Video, ClipboardList
 } from "lucide-react";
 import PageHeader from "@/components/layout/PageHeader";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
@@ -12,6 +12,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import InfoModal from "@/components/ui/InfoModal";
 import { Info } from "lucide-react";
+import TelehealthConsentForm from "@/components/forms/TelehealthConsentForm";
+import HealthWellnessConsentForm from "@/components/forms/HealthWellnessConsentForm";
 
 const partnerLabs = [
   "Accra Medical Genetics",
@@ -151,6 +153,7 @@ export default function GhanaPage() {
                   <TabsTrigger value="services" className="flex-1 min-w-[120px]">General Services</TabsTrigger>
                   <TabsTrigger value="med-psycho" className="flex-1 min-w-[120px]">Med Psychotherapy</TabsTrigger>
                   <TabsTrigger value="partners" className="flex-1 min-w-[120px]">Partner Labs</TabsTrigger>
+                  <TabsTrigger value="forms" className="flex-1 min-w-[120px]">Forms</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="services" className="space-y-12 animate-in fade-in zoom-in-95 duration-300">
@@ -174,6 +177,10 @@ export default function GhanaPage() {
 
                 <TabsContent value="partners" className="space-y-12 animate-in fade-in zoom-in-95 duration-300">
                   <PartnersContent />
+                </TabsContent>
+
+                <TabsContent value="forms" className="space-y-12 animate-in fade-in zoom-in-95 duration-300">
+                  <FormsContent />
                 </TabsContent>
               </Tabs>
             </div>
@@ -216,6 +223,16 @@ export default function GhanaPage() {
               >
                 <div className="pt-4">
                   <PartnersContent />
+                </div>
+              </AccordionItem>
+
+              <AccordionItem
+                title="Forms"
+                isOpen={activeAccordion === 'forms'}
+                onClick={() => setActiveAccordion(activeAccordion === 'forms' ? null : 'forms')}
+              >
+                <div className="pt-4">
+                  <FormsContent />
                 </div>
               </AccordionItem>
             </div>
@@ -425,3 +442,74 @@ const PartnersContent = () => (
     </div>
   </div>
 );
+
+const FormsContent = () => {
+  const [activeForm, setActiveForm] = useState<'telehealth' | 'health-wellness' | null>(null);
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl md:text-3xl font-bold font-serif text-heading mb-4">Consent Forms</h2>
+        <p className="text-black mb-8 font-light text-lg">
+          Please complete the appropriate informed consent form before your appointment. You can fill out, download a PDF copy, and submit the form directly.
+        </p>
+      </div>
+
+      {/* Form Selection Cards */}
+      {!activeForm && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <button
+            onClick={() => setActiveForm('telehealth')}
+            className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all text-left group"
+          >
+            <div className="bg-primary/10 p-4 rounded-full w-fit mb-6 group-hover:bg-primary/20 transition-colors">
+              <Video className="w-8 h-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold font-serif text-heading mb-3">Telehealth Intervention Informed Consent</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Required for patients receiving remote healthcare services via video, phone, or messaging.
+            </p>
+          </button>
+
+          <button
+            onClick={() => setActiveForm('health-wellness')}
+            className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-emerald-300 transition-all text-left group"
+          >
+            <div className="bg-emerald-100 p-4 rounded-full w-fit mb-6 group-hover:bg-emerald-200 transition-colors">
+              <HeartPulse className="w-8 h-8 text-emerald-600" />
+            </div>
+            <h3 className="text-xl font-bold font-serif text-heading mb-3">Health &amp; Wellness Informed Consent</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Required for participants enrolling in health assessments, wellness coaching, and lifestyle programs.
+            </p>
+          </button>
+        </div>
+      )}
+
+      {/* Active Form View */}
+      {activeForm && (
+        <div>
+          <button
+            onClick={() => setActiveForm(null)}
+            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-6"
+          >
+            <ChevronUp className="w-4 h-4 mr-1 rotate-[-90deg]" />
+            Back to Forms
+          </button>
+
+          {activeForm === 'telehealth' && <TelehealthConsentForm />}
+          {activeForm === 'health-wellness' && <HealthWellnessConsentForm />}
+        </div>
+      )}
+
+      {!activeForm && (
+        <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+          <p className="text-sm text-muted-foreground">
+            <span className="font-semibold text-secondary">Privacy Note:</span> Your privacy is our priority.
+            All information provided is encrypted and handled in strict accordance with healthcare privacy standards.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};

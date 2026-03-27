@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
-import { FileText, ClipboardList, Video } from "lucide-react";
+import { FileText, ClipboardList } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "Forms Directory | Mednova+ Inc.",
@@ -21,12 +21,6 @@ export default function FormsDirectoryPage() {
             description: "Complete this intake form prior to your first psychotherapy session.",
             href: "/form/psychotherapy-intake",
             icon: <ClipboardList className="w-8 h-8 text-primary" />,
-        },
-        {
-            title: "Webinar Registration",
-            description: "Register for upcoming Mednova+ educational webinars.",
-            href: "/form/webinar-registration",
-            icon: <Video className="w-8 h-8 text-primary" />,
         },
     ];
 

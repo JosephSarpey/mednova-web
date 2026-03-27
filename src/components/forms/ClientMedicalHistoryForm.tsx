@@ -639,12 +639,12 @@ const ClientMedicalHistoryForm = () => {
                     )}
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                <div className="flex flex-row gap-2 sm:gap-3 w-full sm:w-auto">
                     <button
                         onClick={downloadPDF}
                         disabled={isDownloading}
                         className={cn(
-                            "flex items-center justify-center gap-2 bg-white text-secondary border border-gray-200 px-6 py-3 rounded-xl font-semibold uppercase tracking-wide transition-all hover:bg-gray-50 active:scale-[0.98]",
+                            "flex items-center justify-center gap-2 bg-white text-secondary border border-gray-200 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold uppercase text-xs sm:text-sm tracking-wide transition-all hover:bg-gray-50 active:scale-[0.98] whitespace-nowrap",
                             isDownloading ? "opacity-70 cursor-not-allowed" : ""
                         )}
                     >
@@ -660,13 +660,13 @@ const ClientMedicalHistoryForm = () => {
                         onClick={handleSubmit}
                         disabled={isSubmitting || submitSuccess}
                         className={cn(
-                            "flex items-center justify-center gap-2 bg-primary text-white border-2 border-primary px-8 py-3 rounded-xl font-semibold uppercase tracking-wide transition-all shadow-md hover:shadow-lg active:scale-[0.98]",
+                            "flex items-center justify-center gap-2 bg-primary text-white border-2 border-primary px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl font-semibold uppercase text-xs sm:text-sm tracking-wide transition-all shadow-md hover:shadow-lg active:scale-[0.98] whitespace-nowrap",
                             (isSubmitting || submitSuccess) ? "opacity-70 cursor-not-allowed" : "hover:bg-transparent hover:text-primary"
                         )}
                     >
                         {isSubmitting ? (
                             <>
-                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                                 Submitting...
                             </>
                         ) : submitSuccess ? (

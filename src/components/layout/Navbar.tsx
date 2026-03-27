@@ -24,16 +24,25 @@ const navItems = [
     label: "Services",
     dropdown: [
       // { href: "/services", label: "Services" },
-      
+
       ...services.map((s) => ({ href: `/services/${s.slug}`, label: s.title, displayLabel: s.navLabel ?? s.title })),
-      { href: "/education", label: "Education" },
+      //{ href: "/education", label: "Education" },
     ],
   },
   {
-    label: "Resources",
+    label: "Education",
     dropdown: [
-      { href: "/form", label: "Forms" },
+      //{ href: "/form", label: "Forms" },
       { href: "/blog", label: "Blog" },
+      { href: "/education", label: "Featured Courses" },
+      { href: "/resources", label: "Resources" },
+    ],
+  },
+  {
+    label: "Events",
+    dropdown: [
+      { href: "/events", label: "All Events" },
+      { href: "/events/webinar-registration", label: "Webinar Registration" },
     ],
   },
   { href: "/ghana", label: "Ghana Partners" },

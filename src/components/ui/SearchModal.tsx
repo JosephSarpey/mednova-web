@@ -41,7 +41,8 @@ const searchablePages: PageResult[] = [
     { title: "Forms Directory", href: "/form", description: "Access and submit required forms for Mednova+ services." },
     { title: "Client Medical History Form", href: "/form/medical-history", description: "Provide your medical history for comprehensive evaluation." },
     { title: "Psychotherapy Intake Form", href: "/form/psychotherapy-intake", description: "Complete this intake form prior to your first psychotherapy session." },
-    { title: "Webinar Registration Form", href: "/form/webinar-registration", description: "Register for upcoming Mednova+ educational webinars." },
+    { title: "Webinar Registration Form", href: "/events/webinar-registration", description: "Register for upcoming Mednova+ educational webinars." },
+    { title: "Events", href: "/events", description: "Explore upcoming Mednova+ events, webinars, and educational sessions." },
 ];
 interface SearchModalProps {
     isOpen: boolean;

@@ -16,7 +16,8 @@ export const blogPosts: BlogPost[] = [
   {
     id: 1,
     title: "The Importance of Holistic Health in Modern Society",
-    excerpt: "Holistic health is not just about physical well-being; it encompasses mental, emotional, and social aspects as well...",
+    excerpt:
+      "Holistic health is not just about physical well-being; it encompasses mental, emotional, and social aspects as well...",
     content: `
       <p>Holistic health is an approach to wellness that simultaneously addresses the physical, mental, emotional, social, and spiritual components of health. As a system of care, holistic health emphasizes the personal responsibility of individuals to optimize their health and the use of naturally based healing methods.</p>
       
@@ -49,14 +50,16 @@ export const blogPosts: BlogPost[] = [
     author: "Dr. P. Edem Nukunu",
     authorRole: "Neuropsychotherapist",
     authorImage: "/team/dr_edem.jpg",
-    image: "https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Wellness",
-    tags: ["Holistic", "Wellness", "Lifestyle", "Prevention"]
+    tags: ["Holistic", "Wellness", "Lifestyle", "Prevention"],
   },
   {
     id: 2,
     title: "Managing Stress Through Lifestyle Changes",
-    excerpt: "Chronic stress is a major contributor to many health issues. Learn how simple lifestyle modifications can help you...",
+    excerpt:
+      "Chronic stress is a major contributor to many health issues. Learn how simple lifestyle modifications can help you...",
     content: `
       <p>Stress is a natural physical and mental reaction to life experiences. Everyone experiences stress from time to time. Anything from everyday responsibilities like work and family to serious life events such as a new diagnosis, war, or the death of a loved one can trigger stress.</p>
 
@@ -87,16 +90,18 @@ export const blogPosts: BlogPost[] = [
     `,
     date: "Dec 20, 2024",
     author: "Dr. Simon Arthur",
-    authorRole: "Lifestyle Medicine Specialist",
+    authorRole: "Resident Surgeon, (GH)",
     authorImage: "/team/dr_simon.jpg",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Lifestyle",
-    tags: ["Stress Management", "Mental Health", "Productivity"]
+    tags: ["Stress Management", "Mental Health", "Productivity"],
   },
   {
     id: 3,
     title: "Public Health Strategies for Community Wellness",
-    excerpt: "Effective public health strategies require community engagement and evidence-based interventions...",
+    excerpt:
+      "Effective public health strategies require community engagement and evidence-based interventions...",
     content: `
       <p>Public health is the science of protecting and improving the health of people and their communities. This work is achieved by promoting healthy lifestyles, researching disease and injury prevention, and detecting, preventing, and responding to infectious diseases.</p>
 
@@ -115,17 +120,19 @@ export const blogPosts: BlogPost[] = [
       <p>At Mednova+, we believe that a healthy community is the bedrock of a prosperous society. By working together with local leaders, health professionals, and residents, we can create environments that support health for everyone.</p>
     `,
     date: "Dec 15, 2024",
-    author: "Dr. Zipporah Oparebea Nukunu",
+    author: "Zipporah Oparebea Nukunu",
     authorRole: "Healthcare Operations Consultant and Director",
-    authorImage: "/team/dr_zipporah.jpg",
-    image: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    authorImage: "/team/zipporah.jpg",
+    image:
+      "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Public Health",
-    tags: ["Community", "Public Health", "Prevention", "Education"]
+    tags: ["Community", "Public Health", "Prevention", "Education"],
   },
   {
     id: 4,
     title: "Nutritional Tips for a Healthier Heart",
-    excerpt: "Your diet plays a crucial role in heart health. Discover which foods can help strengthen your cardiovascular system...",
+    excerpt:
+      "Your diet plays a crucial role in heart health. Discover which foods can help strengthen your cardiovascular system...",
     content: `
       <p>Heart disease is a leading cause of death worldwide, but the good news is that much of it is preventable through diet and lifestyle choices. What you put on your plate significantly affects your blood pressure, cholesterol levels, and inflammation—all key factors for heart health.</p>
 
@@ -154,8 +161,9 @@ export const blogPosts: BlogPost[] = [
     author: "Dr. P. Edem Nukunu",
     authorRole: "Neuropsychotherapist",
     authorImage: "/team/dr_edem.jpg",
-    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Nutrition",
-    tags: ["Heart Health", "Nutrition", "Healthy Eating", "Diet"]
-  }
+    tags: ["Heart Health", "Nutrition", "Healthy Eating", "Diet"],
+  },
 ];
