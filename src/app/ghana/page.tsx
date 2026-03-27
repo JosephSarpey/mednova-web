@@ -460,27 +460,27 @@ const FormsContent = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <button
             onClick={() => setActiveForm('telehealth')}
-            className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all text-left group"
+            className="bg-white p-6 sm:p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all text-left group"
           >
             <div className="bg-primary/10 p-4 rounded-full w-fit mb-6 group-hover:bg-primary/20 transition-colors">
               <Video className="w-8 h-8 text-primary" />
             </div>
-            <h3 className="text-xl font-bold font-serif text-heading mb-3">Telehealth Intervention Informed Consent</h3>
+            <h3 className="text-lg sm:text-xl font-bold font-serif text-heading mb-3">Telehealth/Remote Health Informed Consent</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Required for patients receiving remote healthcare services via video, phone, or messaging.
+              Required for clients participating in telehealth as part of their healthcare or medical intervention plan.
             </p>
           </button>
 
           <button
             onClick={() => setActiveForm('health-wellness')}
-            className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-emerald-300 transition-all text-left group"
+            className="bg-white p-6 sm:p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-emerald-300 transition-all text-left group"
           >
             <div className="bg-emerald-100 p-4 rounded-full w-fit mb-6 group-hover:bg-emerald-200 transition-colors">
               <HeartPulse className="w-8 h-8 text-emerald-600" />
             </div>
-            <h3 className="text-xl font-bold font-serif text-heading mb-3">Health &amp; Wellness Informed Consent</h3>
+            <h3 className="text-lg sm:text-xl font-bold font-serif text-heading mb-3">Informed Consent &amp; Disclosure for Healthcare</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Required for participants enrolling in health assessments, wellness coaching, and lifestyle programs.
+              General informed consent and disclosure document for in-person and/or hybrid holistic medical care &amp; lifestyle healthcare services (Doc No.: MN/03/26).
             </p>
           </button>
         </div>

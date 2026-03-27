@@ -10,26 +10,28 @@ import { cn } from "@/lib/utils";
 const TelehealthConsentForm = () => {
     const formRef = useRef<HTMLDivElement>(null);
     const [formData, setFormData] = useState({
-        fullName: "",
-        dateOfBirth: "",
-        gender: "",
+        // Client info
+        clientName: "",
+        providerName: "",
         email: "",
         phone: "",
-        address: "",
+        country: "",
+        // Consent acknowledgements (7 items from the document)
+        consentWithdraw: false,
+        consentRisks: false,
+        consentNoRecording: false,
+        consentPrivacy: false,
+        consentCrisis: false,
+        consentTechnical: false,
+        consentEmergencyContact: false,
+        // Emergency Protocols
+        emergencyLocation: "",
         emergencyContactName: "",
+        emergencyContactAddress: "",
         emergencyContactPhone: "",
-        // Consent checkboxes
-        understandNature: false,
-        understandRisks: false,
-        understandConfidentiality: false,
-        understandRightToWithdraw: false,
-        understandTechnical: false,
-        understandRecording: false,
-        consentToTelehealth: false,
-        // Additional
-        preferredPlatform: "",
-        additionalNotes: "",
+        // Signature
         signatureText: "",
+        guardianSignature: "",
     });
     const [isMounted, setIsMounted] = useState(false);
     const [formRefID, setFormRefID] = useState("");
@@ -79,8 +81,8 @@ const TelehealthConsentForm = () => {
             doc.setFont("helvetica", "bold");
             doc.setFontSize(12);
             doc.setTextColor(19, 162, 183);
-            doc.text("TELEHEALTH INTERVENTION", pageWidth - 20, yPos, { align: "right" });
-            doc.text("INFORMED CONSENT FORM", pageWidth - 20, yPos + 6, { align: "right" });
+            doc.text("TELEHEALTH/REMOTE HEALTH", pageWidth - 20, yPos, { align: "right" });
+            doc.text("INFORMED CONSENT", pageWidth - 20, yPos + 6, { align: "right" });
 
             yPos += 18;
             doc.setDrawColor(220, 220, 220);
@@ -88,14 +90,60 @@ const TelehealthConsentForm = () => {
             doc.line(20, yPos, pageWidth - 20, yPos);
             yPos += 10;
 
-            // Personal Details
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(14);
-            doc.setTextColor(12, 43, 75);
-            doc.text("Patient Information", 20, yPos);
-            yPos += 10;
+            // Opening Statement
+            doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
             doc.setTextColor(0, 0, 0);
+            const openingText = `I, ${formData.clientName || "_______________"}, hereby consent to participate in telehealth with ${formData.providerName || "_______________"} as part of my healthcare or medical intervention plan needs. I confirm to being in ${formData.country || "Ghana"}, Ghanaian or other country other than the United States. I understand that telehealth is the practice of delivering clinical health care services via technology assisted media or other electronic means between a practitioner and a client who are located in two different locations.`;
+            const openingLines = doc.splitTextToSize(openingText, pageWidth - 40);
+            doc.text(openingLines, 20, yPos);
+            yPos += openingLines.length * 5 + 5;
+
+            // Consent items
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(11);
+            doc.setTextColor(12, 43, 75);
+            doc.text("I understand the following with respect to telehealth:", 20, yPos);
+            yPos += 8;
+
+            doc.setFontSize(9);
+            doc.setTextColor(0, 0, 0);
+
+            const consentItems = [
+                { num: "1", text: "I understand that I have the right to withdraw consent at any time without affecting my right to future care, services, or program benefits to which I would otherwise be entitled.", checked: formData.consentWithdraw },
+                { num: "2", text: "I understand that there are risk and consequences associated with telehealth medical or healthcare, including but not limited to, disruption of transmission by technology failures, interruption and/or breaches of confidentiality by unauthorized persons, and/or limited ability to respond to emergencies.", checked: formData.consentRisks },
+                { num: "3", text: "I understand that there will be no recording of any of the online therapeutic or health coaching sessions by either party. All information disclosed within sessions and written records pertaining to those sessions are confidential and may not be disclosed to anyone without written authorization, except where permitted and/or required by law.", checked: formData.consentNoRecording },
+                { num: "4", text: "I understand that the privacy laws that protect the confidentiality of my protected health information (PHI) also apply to telehealth care unless an exception to confidentiality applies (i.e. mandatory reporting of child, elder, or vulnerable adult abuse; danger to self or others).", checked: formData.consentPrivacy },
+                { num: "5", text: "I understand that if I am having suicidal or homicidal thoughts or medical/health emergency, actively experiencing psychotic symptoms or experiencing a mental health crisis that cannot be resolved remotely, it may be determined that telehealth services are not appropriate and a higher level of care is required.", checked: formData.consentCrisis },
+                { num: "6", text: "I understand that during a telehealth session, we could encounter technical difficulties resulting in service interruptions. If this occurs, end and restart the session. If unable to reconnect within fifteen minutes, please call Dr. Arthur (+233(0) 246831417) or Dr. P. Edem Nukunu (+19144383914) to discuss rescheduling.", checked: formData.consentTechnical },
+                { num: "7", text: "I understand that my healthcare provider may need to contact my emergency contact and/or appropriate authorities in case of an emergency.", checked: formData.consentEmergencyContact },
+            ];
+
+            consentItems.forEach((item) => {
+                if (yPos > 255) { doc.addPage(); yPos = 20; }
+                const checkMark = item.checked ? "☑" : "☐";
+                doc.setFont("helvetica", "normal");
+                const lines = doc.splitTextToSize(`${checkMark} ${item.num}) ${item.text}`, pageWidth - 40);
+                doc.text(lines, 20, yPos);
+                yPos += lines.length * 4.5 + 3;
+            });
+
+            // Emergency Protocols
+            if (yPos > 230) { doc.addPage(); yPos = 20; }
+            yPos += 5;
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.setTextColor(12, 43, 75);
+            doc.text("Emergency Protocols", 20, yPos);
+            yPos += 8;
+
+            doc.setFontSize(9);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont("helvetica", "normal");
+            const emergencyIntro = "I need to know your location in case of an emergency. You agree to inform me of the address where you are at the beginning of each meeting. I also need a contact person who I may contact on your behalf in a life-threatening emergency only.";
+            const emergencyLines = doc.splitTextToSize(emergencyIntro, pageWidth - 40);
+            doc.text(emergencyLines, 20, yPos);
+            yPos += emergencyLines.length * 5 + 5;
 
             const addField = (label: string, value: string, x: number, y: number, valueOffsetX = 45) => {
                 doc.setFont("helvetica", "bold");
@@ -106,85 +154,23 @@ const TelehealthConsentForm = () => {
                 doc.setTextColor(0, 0, 0);
             };
 
-            const leftColX = 20;
-            const rightColX = pageWidth / 2 + 10;
-
-            addField("Full Name:", formData.fullName, leftColX, yPos);
-            addField("Date of Birth:", formData.dateOfBirth, rightColX, yPos);
+            addField("Emergency Location:", formData.emergencyLocation, 20, yPos, 45);
             yPos += 8;
-            addField("Gender:", formData.gender ? formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1) : "", leftColX, yPos);
-            addField("Phone:", formData.phone, rightColX, yPos);
+            addField("Contact Name:", formData.emergencyContactName, 20, yPos, 45);
             yPos += 8;
-            addField("Email:", formData.email, leftColX, yPos);
+            addField("Contact Address:", formData.emergencyContactAddress, 20, yPos, 45);
             yPos += 8;
-            addField("Address:", formData.address || "N/A", leftColX, yPos, 45);
-            yPos += 8;
-            addField("Emergency Contact:", formData.emergencyContactName, leftColX, yPos, 45);
-            addField("Emergency Phone:", formData.emergencyContactPhone, rightColX, yPos, 45);
-
-            yPos += 12;
-            doc.setDrawColor(230, 230, 230);
-            doc.line(20, yPos, pageWidth - 20, yPos);
-            yPos += 10;
-
-            // Consent Section
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(14);
-            doc.setTextColor(12, 43, 75);
-            doc.text("Consent Acknowledgements", 20, yPos);
-            yPos += 10;
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-
-            const consentItems = [
-                { label: "Understanding of Telehealth Nature", value: formData.understandNature },
-                { label: "Understanding of Risks & Benefits", value: formData.understandRisks },
-                { label: "Understanding of Confidentiality", value: formData.understandConfidentiality },
-                { label: "Right to Withdraw Consent", value: formData.understandRightToWithdraw },
-                { label: "Understanding of Technical Requirements", value: formData.understandTechnical },
-                { label: "Understanding of Recording Policy", value: formData.understandRecording },
-                { label: "Consent to Telehealth Services", value: formData.consentToTelehealth },
-            ];
-
-            consentItems.forEach((item) => {
-                if (yPos > 260) { doc.addPage(); yPos = 20; }
-                const checkMark = item.value ? "☑" : "☐";
-                doc.setFont("helvetica", "normal");
-                doc.text(`${checkMark}  ${item.label}`, 20, yPos);
-                yPos += 7;
-            });
-
-            yPos += 5;
-            addField("Preferred Platform:", formData.preferredPlatform || "N/A", leftColX, yPos, 45);
-            yPos += 8;
-
-            if (formData.additionalNotes) {
-                doc.setFont("helvetica", "bold");
-                doc.text("Additional Notes:", 20, yPos);
-                yPos += 6;
-                doc.setFont("helvetica", "normal");
-                doc.setTextColor(60, 60, 60);
-                const noteLines = doc.splitTextToSize(formData.additionalNotes, pageWidth - 40);
-                doc.text(noteLines, 20, yPos);
-                yPos += noteLines.length * 5 + 5;
-                doc.setTextColor(0, 0, 0);
-            }
+            addField("Contact Phone:", formData.emergencyContactPhone, 20, yPos, 45);
 
             // Declaration
+            yPos += 15;
             if (yPos > 240) { doc.addPage(); yPos = 20; }
-            yPos += 5;
-            doc.setDrawColor(220, 220, 220);
-            doc.line(20, yPos, pageWidth - 20, yPos);
-            yPos += 10;
 
-            doc.setFont("helvetica", "bold");
-            doc.text("Declaration:", 20, yPos);
-            yPos += 6;
             doc.setFont("helvetica", "normal");
             doc.setFontSize(9);
             doc.setTextColor(80, 80, 80);
             const decLines = doc.splitTextToSize(
-                "I hereby voluntarily consent to participate in telehealth interventions provided by Mednova+ Inc. I have read and understood the nature, risks, benefits, and limitations of telehealth services. I understand that I may withdraw my consent at any time.",
+                "I have read the information provided above and discussed it with my therapist/practitioner. I understand the information contained in this form and all of my questions have been answered to my satisfaction.",
                 pageWidth - 40
             );
             doc.text(decLines, 20, yPos);
@@ -205,7 +191,15 @@ const TelehealthConsentForm = () => {
             yPos += 5;
             doc.setFontSize(10);
             doc.setTextColor(0, 0, 0);
-            doc.text("Patient Signature", 20, yPos);
+            doc.text("Signature of Client/Parent/Legal Guardian", 20, yPos);
+            doc.text("Date", pageWidth - 80, yPos);
+
+            yPos += 15;
+            if (yPos > 260) { doc.addPage(); yPos = 20; }
+            doc.line(20, yPos, 80, yPos);
+            doc.line(pageWidth - 80, yPos, pageWidth - 20, yPos);
+            yPos += 5;
+            doc.text("Signature of Practitioner/Therapist", 20, yPos);
             doc.text("Date", pageWidth - 80, yPos);
 
             const pageCount = (doc.internal as any).getNumberOfPages();
@@ -217,7 +211,7 @@ const TelehealthConsentForm = () => {
                 doc.text(`Ref: ${formRefID} | Page ${i} of ${pageCount}`, pageWidth - 20, 287, { align: "right" });
             }
 
-            doc.save(`Telehealth_Consent_${formData.fullName.replace(/\s+/g, "_") || "Submission"}.pdf`);
+            doc.save(`Telehealth_Consent_${formData.clientName.replace(/\s+/g, "_") || "Submission"}.pdf`);
         } catch (error) {
             console.error("PDF generation failed:", error);
             alert("There was an issue generating the PDF.");
@@ -229,7 +223,7 @@ const TelehealthConsentForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const requiredFields = ["fullName", "email", "phone"];
+        const requiredFields = ["clientName", "email", "phone"];
         const missingFields = requiredFields.filter((field) => !formData[field as keyof typeof formData]);
 
         if (missingFields.length > 0) {
@@ -238,8 +232,11 @@ const TelehealthConsentForm = () => {
             return;
         }
 
-        if (!formData.consentToTelehealth) {
-            setSubmitError("You must consent to telehealth services to submit this form.");
+        const allConsented = formData.consentWithdraw && formData.consentRisks && formData.consentNoRecording &&
+            formData.consentPrivacy && formData.consentCrisis && formData.consentTechnical && formData.consentEmergencyContact;
+
+        if (!allConsented) {
+            setSubmitError("You must acknowledge all consent items to submit this form.");
             setTimeout(() => setSubmitError(""), 5000);
             return;
         }
@@ -264,27 +261,27 @@ const TelehealthConsentForm = () => {
                     Accept: "application/json",
                 },
                 body: JSON.stringify({
-                    "Form Type": "Telehealth Intervention Informed Consent",
+                    "Form Type": "Telehealth/Remote Health Informed Consent",
                     "Reference ID": formRefID,
                     "Generated Date": currentDate,
-                    "Full Name": formData.fullName,
-                    "Date of Birth": formData.dateOfBirth,
-                    Gender: formData.gender,
-                    Email: formData.email,
-                    Phone: formData.phone,
-                    Address: formData.address,
+                    "Client Name": formData.clientName,
+                    "Provider Name": formData.providerName,
+                    "Email": formData.email,
+                    "Phone": formData.phone,
+                    "Country": formData.country,
+                    "Consent - Right to Withdraw": formData.consentWithdraw ? "Yes" : "No",
+                    "Consent - Risks Acknowledged": formData.consentRisks ? "Yes" : "No",
+                    "Consent - No Recording": formData.consentNoRecording ? "Yes" : "No",
+                    "Consent - Privacy/PHI": formData.consentPrivacy ? "Yes" : "No",
+                    "Consent - Crisis Protocol": formData.consentCrisis ? "Yes" : "No",
+                    "Consent - Technical Difficulties": formData.consentTechnical ? "Yes" : "No",
+                    "Consent - Emergency Contact Auth": formData.consentEmergencyContact ? "Yes" : "No",
+                    "Emergency Location": formData.emergencyLocation,
                     "Emergency Contact Name": formData.emergencyContactName,
+                    "Emergency Contact Address": formData.emergencyContactAddress,
                     "Emergency Contact Phone": formData.emergencyContactPhone,
-                    "Understands Nature of Telehealth": formData.understandNature ? "Yes" : "No",
-                    "Understands Risks & Benefits": formData.understandRisks ? "Yes" : "No",
-                    "Understands Confidentiality": formData.understandConfidentiality ? "Yes" : "No",
-                    "Understands Right to Withdraw": formData.understandRightToWithdraw ? "Yes" : "No",
-                    "Understands Technical Requirements": formData.understandTechnical ? "Yes" : "No",
-                    "Understands Recording Policy": formData.understandRecording ? "Yes" : "No",
-                    "Consents to Telehealth": formData.consentToTelehealth ? "Yes" : "No",
-                    "Preferred Platform": formData.preferredPlatform,
-                    "Additional Notes": formData.additionalNotes,
-                    "Signature Text": formData.signatureText,
+                    "Client Signature": formData.signatureText,
+                    "Guardian Signature": formData.guardianSignature,
                 }),
             });
 
@@ -316,8 +313,8 @@ const TelehealthConsentForm = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-8 mb-8 gap-6">
                     <div>
                         <Image src="/logo.png" alt="Mednova+ Logo" width={180} height={60} className="h-12 w-auto mb-4" />
-                        <h1 className="text-2xl font-bold text-secondary uppercase tracking-tight">
-                            Telehealth Intervention Informed Consent
+                        <h1 className="text-xl sm:text-2xl font-bold text-secondary uppercase tracking-tight">
+                            Telehealth/Remote Health Informed Consent
                         </h1>
                         <p className="text-sm text-muted-foreground mt-1">
                             Please review and complete the consent form below.
@@ -325,70 +322,54 @@ const TelehealthConsentForm = () => {
                     </div>
                 </div>
 
-                <div className="space-y-12">
-                    {/* Telehealth Information Banner */}
+                <div className="space-y-10">
+                    {/* Opening Statement Banner */}
                     <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 sm:p-6">
                         <div className="flex items-start gap-3">
                             <Video className="w-6 h-6 text-primary mt-0.5 flex-shrink-0" />
-                            <div>
-                                <h3 className="font-semibold text-secondary mb-2">About Telehealth Services</h3>
-                                <p className="text-sm text-muted-foreground leading-relaxed">
-                                    Telehealth involves the use of electronic communications to enable healthcare providers to deliver
-                                    medical services remotely. This includes but is not limited to video consultations, phone calls,
-                                    messaging, and remote monitoring. By signing this form, you consent to receive healthcare services
-                                    via telehealth technology.
-                                </p>
-                            </div>
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                                I understand that telehealth is the practice of delivering clinical health care services via
+                                technology assisted media or other electronic means between a practitioner and a client who
+                                are located in two different locations. I confirm to being in Ghana, Ghanaian or other country
+                                other than the United States.
+                            </p>
                         </div>
                     </div>
 
-                    {/* Personal Details */}
+                    {/* Client & Provider Information */}
                     <div className="space-y-6">
                         <h3 className="text-lg font-semibold text-heading flex items-center gap-2 border-l-4 border-primary pl-3">
-                            <User className="w-5 h-5 text-primary" /> Patient Information
+                            <User className="w-5 h-5 text-primary" /> Client &amp; Provider Information
                         </h3>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-1.5">
                                 <label className="text-sm font-medium text-secondary ml-1">
-                                    Full Name <span className="text-red-500">*</span>
+                                    Name of Client <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="text"
-                                    name="fullName"
-                                    value={formData.fullName}
+                                    name="clientName"
+                                    value={formData.clientName}
                                     onChange={handleInputChange}
-                                    placeholder="John Doe"
+                                    placeholder="Full name of client"
                                     required
                                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                                 />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-1.5">
-                                    <label className="text-sm font-medium text-secondary ml-1">Date of Birth</label>
-                                    <input
-                                        type="date"
-                                        name="dateOfBirth"
-                                        value={formData.dateOfBirth}
-                                        onChange={handleInputChange}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                                    />
-                                </div>
-                                <div className="space-y-1.5">
-                                    <label className="text-sm font-medium text-secondary ml-1">Gender</label>
-                                    <select
-                                        name="gender"
-                                        value={formData.gender}
-                                        onChange={handleInputChange}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white"
-                                    >
-                                        <option value="">Select</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-medium text-secondary ml-1">
+                                    Name of Provider
+                                </label>
+                                <input
+                                    type="text"
+                                    name="providerName"
+                                    value={formData.providerName}
+                                    onChange={handleInputChange}
+                                    placeholder="Name of healthcare provider"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                                />
                             </div>
 
                             <div className="space-y-1.5">
@@ -428,41 +409,129 @@ const TelehealthConsentForm = () => {
                             </div>
 
                             <div className="space-y-1.5 md:col-span-2">
-                                <label className="text-sm font-medium text-secondary ml-1">Residential Address</label>
+                                <label className="text-sm font-medium text-secondary ml-1">
+                                    Country of Residence
+                                </label>
+                                <input
+                                    type="text"
+                                    name="country"
+                                    value={formData.country}
+                                    onChange={handleInputChange}
+                                    placeholder="e.g. Ghana"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Consent Acknowledgements — 7 items from the document */}
+                    <div className="space-y-6">
+                        <h3 className="text-lg font-semibold text-heading flex items-center gap-2 border-l-4 border-mednova-green pl-3">
+                            <ShieldCheck className="w-5 h-5 text-mednova-green" /> Consent Acknowledgements
+                        </h3>
+                        <p className="text-sm text-muted-foreground">I understand the following with respect to telehealth:</p>
+
+                        <div className="space-y-4">
+                            <div className="bg-gray-50 p-3 sm:p-4 rounded-xl space-y-5">
+                                <label className="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="consentWithdraw" checked={formData.consentWithdraw} onChange={handleInputChange} className="mt-1 accent-primary w-4 h-4 flex-shrink-0" />
+                                    <span className="text-sm text-secondary leading-relaxed">
+                                        <strong>1)</strong> I understand that I have the right to withdraw consent at any time without affecting my right to future care, services, or program benefits to which I would otherwise be entitled.
+                                    </span>
+                                </label>
+
+                                <label className="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="consentRisks" checked={formData.consentRisks} onChange={handleInputChange} className="mt-1 accent-primary w-4 h-4 flex-shrink-0" />
+                                    <span className="text-sm text-secondary leading-relaxed">
+                                        <strong>2)</strong> I understand that there are risk and consequences associated with telehealth medical or healthcare, including but not limited to, disruption of transmission by technology failures, interruption and/or breaches of confidentiality by unauthorized persons, and/or limited ability to respond to emergencies.
+                                    </span>
+                                </label>
+
+                                <label className="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="consentNoRecording" checked={formData.consentNoRecording} onChange={handleInputChange} className="mt-1 accent-primary w-4 h-4 flex-shrink-0" />
+                                    <span className="text-sm text-secondary leading-relaxed">
+                                        <strong>3)</strong> I understand that there will be no recording of any of the online therapeutic or health coaching sessions or meet-up by either party. All information disclosed within sessions or during care conversation and written records pertaining to those health coaching or care sessions are confidential and may not be disclosed to anyone without written authorization, except where the disclosure is permitted and/or required by law.
+                                    </span>
+                                </label>
+
+                                <label className="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="consentPrivacy" checked={formData.consentPrivacy} onChange={handleInputChange} className="mt-1 accent-primary w-4 h-4 flex-shrink-0" />
+                                    <span className="text-sm text-secondary leading-relaxed">
+                                        <strong>4)</strong> I understand that the privacy laws that protect the confidentiality of my protected health information (PHI) also apply to telehealth care unless an exception to confidentiality applies (i.e. mandatory reporting of child, elder, or vulnerable adult abuse; danger to self or others; I raise mental/emotional/emergency health as an issue in a legal proceeding).
+                                    </span>
+                                </label>
+
+                                <label className="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="consentCrisis" checked={formData.consentCrisis} onChange={handleInputChange} className="mt-1 accent-primary w-4 h-4 flex-shrink-0" />
+                                    <span className="text-sm text-secondary leading-relaxed">
+                                        <strong>5)</strong> I understand that if I am having suicidal or homicidal thoughts or medical/health emergency, actively experiencing psychotic symptoms or experiencing a mental health crisis or emergency that cannot be resolved remotely, it may be determined that telehealth services are not appropriate and a higher level of care is required.
+                                    </span>
+                                </label>
+
+                                <label className="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="consentTechnical" checked={formData.consentTechnical} onChange={handleInputChange} className="mt-1 accent-primary w-4 h-4 flex-shrink-0" />
+                                    <span className="text-sm text-secondary leading-relaxed">
+                                        <strong>6)</strong> I understand that during a telehealth session, we could encounter technical difficulties resulting in service interruptions. If this occurs, end and restart the session. If we are unable to reconnect within fifteen minutes, please call Dr. Arthur (+233(0) 246831417) or Dr. P. Edem Nukunu (+19144383914) to discuss since we may have to re-schedule.
+                                    </span>
+                                </label>
+
+                                <label className="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="consentEmergencyContact" checked={formData.consentEmergencyContact} onChange={handleInputChange} className="mt-1 accent-primary w-4 h-4 flex-shrink-0" />
+                                    <span className="text-sm text-secondary leading-relaxed">
+                                        <strong>7)</strong> I understand that my healthcare provider may need to contact my emergency contact and/or appropriate authorities in case of an emergency.
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Emergency Protocols */}
+                    <div className="space-y-6">
+                        <h3 className="text-lg font-semibold text-heading flex items-center gap-2 border-l-4 border-red-400 pl-3">
+                            <AlertCircle className="w-5 h-5 text-red-400" /> Emergency Protocols
+                        </h3>
+
+                        <div className="bg-red-50 border border-red-100 rounded-xl p-4 sm:p-5">
+                            <p className="text-sm text-secondary leading-relaxed">
+                                I need to know your location in case of an emergency. You agree to inform me of the address
+                                where you are at the beginning of each meeting. I also need a contact person who I may contact
+                                on your behalf in a <strong>life-threatening emergency only</strong>. This person will only be contacted
+                                to go to your location or take you to the hospital in the event of an emergency.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-1.5 md:col-span-2">
+                                <label className="text-sm font-medium text-secondary ml-1">
+                                    In case of an emergency, my location is:
+                                </label>
                                 <div className="relative">
                                     <MapPin className="absolute left-4 top-4 w-4 h-4 text-gray-400" />
                                     <textarea
-                                        name="address"
-                                        value={formData.address}
+                                        name="emergencyLocation"
+                                        value={formData.emergencyLocation}
                                         onChange={handleInputChange}
-                                        placeholder="Enter your full address"
+                                        placeholder="Enter the address where you will be located during sessions"
                                         rows={2}
                                         className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none"
                                     />
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    {/* Emergency Contact */}
-                    <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-heading flex items-center gap-2 border-l-4 border-red-400 pl-3">
-                            <AlertCircle className="w-5 h-5 text-red-400" /> Emergency Contact
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-1.5">
-                                <label className="text-sm font-medium text-secondary ml-1">Contact Name</label>
+                                <label className="text-sm font-medium text-secondary ml-1">Emergency Contact Person&apos;s Name</label>
                                 <input
                                     type="text"
                                     name="emergencyContactName"
                                     value={formData.emergencyContactName}
                                     onChange={handleInputChange}
-                                    placeholder="Emergency contact full name"
+                                    placeholder="Full name"
                                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                                 />
                             </div>
+
                             <div className="space-y-1.5">
-                                <label className="text-sm font-medium text-secondary ml-1">Contact Phone</label>
+                                <label className="text-sm font-medium text-secondary ml-1">Emergency Contact Phone</label>
                                 <div className="relative">
                                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                     <input
@@ -475,160 +544,64 @@ const TelehealthConsentForm = () => {
                                     />
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    {/* Consent Acknowledgements */}
-                    <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-heading flex items-center gap-2 border-l-4 border-mednova-green pl-3">
-                            <ShieldCheck className="w-5 h-5 text-mednova-green" /> Consent Acknowledgements
-                        </h3>
-
-                        <div className="space-y-4">
-                            <div className="bg-gray-50 p-4 rounded-xl space-y-4">
-                                <label className="flex items-start gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        name="understandNature"
-                                        checked={formData.understandNature}
+                            <div className="space-y-1.5 md:col-span-2">
+                                <label className="text-sm font-medium text-secondary ml-1">Emergency Contact Address</label>
+                                <div className="relative">
+                                    <MapPin className="absolute left-4 top-4 w-4 h-4 text-gray-400" />
+                                    <textarea
+                                        name="emergencyContactAddress"
+                                        value={formData.emergencyContactAddress}
                                         onChange={handleInputChange}
-                                        className="mt-1 accent-primary w-4 h-4"
+                                        placeholder="Address of emergency contact person"
+                                        rows={2}
+                                        className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none"
                                     />
-                                    <span className="text-sm text-secondary leading-relaxed">
-                                        I understand that telehealth involves the use of electronic communications to enable healthcare providers at different locations to share individual patient medical information for the purpose of improving patient care.
-                                    </span>
-                                </label>
-
-                                <label className="flex items-start gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        name="understandRisks"
-                                        checked={formData.understandRisks}
-                                        onChange={handleInputChange}
-                                        className="mt-1 accent-primary w-4 h-4"
-                                    />
-                                    <span className="text-sm text-secondary leading-relaxed">
-                                        I understand the potential risks associated with telehealth, including but not limited to: interruptions, delays, unauthorized access, and the possibility that the electronic systems may not work as intended.
-                                    </span>
-                                </label>
-
-                                <label className="flex items-start gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        name="understandConfidentiality"
-                                        checked={formData.understandConfidentiality}
-                                        onChange={handleInputChange}
-                                        className="mt-1 accent-primary w-4 h-4"
-                                    />
-                                    <span className="text-sm text-secondary leading-relaxed">
-                                        I understand that all patient information during telehealth consultations will remain confidential and will be handled in accordance with applicable healthcare privacy regulations.
-                                    </span>
-                                </label>
-
-                                <label className="flex items-start gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        name="understandRightToWithdraw"
-                                        checked={formData.understandRightToWithdraw}
-                                        onChange={handleInputChange}
-                                        className="mt-1 accent-primary w-4 h-4"
-                                    />
-                                    <span className="text-sm text-secondary leading-relaxed">
-                                        I understand that I have the right to withdraw my consent and discontinue telehealth services at any time without affecting my right to future care or treatment.
-                                    </span>
-                                </label>
-
-                                <label className="flex items-start gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        name="understandTechnical"
-                                        checked={formData.understandTechnical}
-                                        onChange={handleInputChange}
-                                        className="mt-1 accent-primary w-4 h-4"
-                                    />
-                                    <span className="text-sm text-secondary leading-relaxed">
-                                        I understand that I am responsible for providing the necessary equipment and internet connection for the telehealth session and ensuring a private environment during consultations.
-                                    </span>
-                                </label>
-
-                                <label className="flex items-start gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        name="understandRecording"
-                                        checked={formData.understandRecording}
-                                        onChange={handleInputChange}
-                                        className="mt-1 accent-primary w-4 h-4"
-                                    />
-                                    <span className="text-sm text-secondary leading-relaxed">
-                                        I understand that the telehealth session will not be recorded without my explicit consent, and I agree not to record the session without the provider&apos;s consent.
-                                    </span>
-                                </label>
-                            </div>
-
-                            <div className="bg-primary/5 p-5 rounded-xl border border-primary/20">
-                                <label className="flex items-start gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        name="consentToTelehealth"
-                                        checked={formData.consentToTelehealth}
-                                        onChange={handleInputChange}
-                                        className="mt-1 accent-primary w-5 h-5"
-                                    />
-                                    <span className="text-sm font-semibold text-secondary leading-relaxed">
-                                        I hereby consent to participate in telehealth interventions provided by Mednova+ Inc. I have read,
-                                        understood, and agree to all conditions stated above. <span className="text-red-500">*</span>
-                                    </span>
-                                </label>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Preferred Platform & Notes */}
+                    {/* Declaration & Signature */}
                     <div className="space-y-6">
                         <h3 className="text-lg font-semibold text-heading flex items-center gap-2 border-l-4 border-secondary pl-3">
-                            <FileText className="w-5 h-5 text-secondary" /> Additional Information
+                            <FileText className="w-5 h-5 text-secondary" /> Declaration &amp; Signature
                         </h3>
+
+                        <div className="bg-gray-50 rounded-xl p-4 sm:p-5 border border-gray-100">
+                            <p className="text-sm text-secondary leading-relaxed">
+                                I have read the information provided above and discussed it with my therapist. I understand
+                                the information contained in this form and all of my questions have been answered to my satisfaction.
+                            </p>
+                        </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-1.5">
-                                <label className="text-sm font-medium text-secondary ml-1">Preferred Telehealth Platform</label>
-                                <select
-                                    name="preferredPlatform"
-                                    value={formData.preferredPlatform}
-                                    onChange={handleInputChange}
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white"
-                                >
-                                    <option value="">Select a platform</option>
-                                    <option value="zoom">Zoom</option>
-                                    <option value="google-meet">Google Meet</option>
-                                    <option value="whatsapp-video">WhatsApp Video</option>
-                                    <option value="phone-call">Phone Call</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div className="space-y-1.5">
-                                <label className="text-sm font-medium text-secondary ml-1">Type Your Full Name as Signature</label>
+                                <label className="text-sm font-medium text-secondary ml-1">
+                                    Signature of Client/Parent/Legal Guardian <span className="text-red-500">*</span>
+                                </label>
                                 <input
                                     type="text"
                                     name="signatureText"
                                     value={formData.signatureText}
                                     onChange={handleInputChange}
-                                    placeholder="Type your full legal name"
+                                    placeholder="Type your full legal name as signature"
                                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all italic"
                                 />
                             </div>
-                        </div>
-
-                        <div className="space-y-1.5">
-                            <label className="text-sm font-medium text-secondary ml-1">Additional Notes or Concerns</label>
-                            <textarea
-                                name="additionalNotes"
-                                value={formData.additionalNotes}
-                                onChange={handleInputChange}
-                                placeholder="Any additional information, concerns, or questions you'd like to share..."
-                                rows={3}
-                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none"
-                            />
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-medium text-secondary ml-1">
+                                    Guardian Signature (if applicable)
+                                </label>
+                                <input
+                                    type="text"
+                                    name="guardianSignature"
+                                    value={formData.guardianSignature}
+                                    onChange={handleInputChange}
+                                    placeholder="If client is a minor, guardian's full name"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all italic"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -637,7 +610,7 @@ const TelehealthConsentForm = () => {
                 <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row justify-between text-[10px] text-muted-foreground uppercase tracking-widest gap-4">
                     <div>Generated on: {isMounted ? currentDate : "---"}</div>
                     <div className="flex items-center gap-2">
-                        <AlertCircle className="w-3 h-3" /> Confirmed by Patient Signature
+                        <AlertCircle className="w-3 h-3" /> Confirmed by Client Signature
                     </div>
                     <div>Ref: {isMounted ? formRefID : "---"}</div>
                 </div>
@@ -653,20 +626,12 @@ const TelehealthConsentForm = () => {
                         Please ensure all consent checkboxes are checked. You can only submit once every 5 minutes.
                     </p>
                     {submitSuccess && (
-                        <motion.p
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="text-xs text-green-600 font-medium"
-                        >
+                        <motion.p initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="text-xs text-green-600 font-medium">
                             Form submitted successfully!
                         </motion.p>
                     )}
                     {submitError && (
-                        <motion.p
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="text-xs text-red-600 font-medium"
-                        >
+                        <motion.p initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="text-xs text-red-600 font-medium">
                             {submitError}
                         </motion.p>
                     )}
