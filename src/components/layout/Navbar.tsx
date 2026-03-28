@@ -165,10 +165,10 @@ export default function Navbar() {
           {/* CTA Button */}
           <div className="hidden lg:flex">
             <Link
-              href="/form"
+              href="/contact"
               className="bg-primary text-white border-2 border-primary px-4 xl:px-6 py-2 xl:py-3 rounded-md text-[14px] xl:text-[15px] uppercase tracking-wider hover:bg-transparent hover:text-primary transition duration-300 whitespace-nowrap"
             >
-              Pick a Form
+              Get Started
             </Link>
           </div>
 
@@ -252,7 +252,7 @@ export default function Navbar() {
               className="block w-full text-center px-3 py-3 text-white uppercase mt-4 bg-primary rounded-md"
               onClick={() => setIsOpen(false)}
             >
-              Pick A Form
+              Get Started
             </Link>
           </div>
         </div>

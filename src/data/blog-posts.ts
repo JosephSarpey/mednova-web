@@ -51,7 +51,7 @@ export const blogPosts: BlogPost[] = [
     authorRole: "Neuropsychotherapist",
     authorImage: "/team/dr_edem.jpg",
     image:
-      "https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Wellness",
     tags: ["Holistic", "Wellness", "Lifestyle", "Prevention"],
   },
